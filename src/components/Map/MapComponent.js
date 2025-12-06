@@ -1,14 +1,23 @@
 "use client";
 
-import React from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import React, { useMemo } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import indonesianData from "../../../public/id.json";
 import { GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Cloud from "./Cloud";
+import { PROVINCE_MARKERS } from "@/constants/MarkerPositions";
 
 const MapComponent = () => {
+  const defaultIcon = L.icon({
+    iconUrl: "/sumatera.webp",
+    iconSize: [40, 40],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    className: "rounded-full",
+  });
+
   // boundary indonesia
   const bounds = [
     [-13.92, 90.01],
@@ -33,8 +42,9 @@ const MapComponent = () => {
     <main className="h-screen w-full relative">
       <MapContainer
         center={[-3.2889889859501693, 118.94523262448598]} // koordinat awal
-        zoom={5} // level zoom awal
+        zoom={6} // level zoom awal
         minZoom={5.5} // batas untuk zoom out
+        maxZoom={10}
         className="w-full h-full" // class map
         maxBounds={bounds}
         maxBoundsViscosity={11}
@@ -43,6 +53,16 @@ const MapComponent = () => {
       >
         <GeoJSON data={indonesianData} style={geoJsonStyle} />
         <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
+
+        {PROVINCE_MARKERS.map((prov) => (
+          <Marker
+            key={prov.originalIndex}
+            position={prov.position}
+            icon={defaultIcon}
+          >
+            <Popup>{prov.name}</Popup>
+          </Marker>
+        ))}
       </MapContainer>
       <Cloud />
     </main>
