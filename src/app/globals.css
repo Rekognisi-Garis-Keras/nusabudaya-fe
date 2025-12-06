@@ -7,6 +7,8 @@
   background-repeat: repeat;
   background-size: cover;
   opacity: 0.2;
+  z-index: 99;
+  mix-blend-mode: screen;
   animation: moveCloudsDiag 60s linear infinite;
 }
 
@@ -32,4 +34,29 @@
   to {
     opacity: 1;
   }
+}
+
+/* 🔎 Target class unik yang kita buat tadi */
+.my-custom-popup .leaflet-popup-content-wrapper {
+  /* background: rgba(20, 20, 20, 0.9); Background gelap transparan */
+  background: #05121b70;
+  color: white; /* Teks putih */
+  border-radius: 12px; /* Sudut membulat */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid #c8a668; /* Border ungu sesuai tema kamu */
+  padding: 0; /* Reset padding kalau perlu */
+  z-index: 99999;
+}
+
+/* 🔎 Warnain segitiga kecil di bawahnya biar matching */
+.my-custom-popup .leaflet-popup-tip {
+  /* background: rgba(20, 20, 20, 0.9); */
+  background: #05121b70;
+  border: 1px solid #c8a668;
+}
+
+/* 🔎 Atur margin/spacing konten di dalem */
+.my-custom-popup .leaflet-popup-content {
+  margin: 8px 12px;
+  line-height: 1.4;
 }

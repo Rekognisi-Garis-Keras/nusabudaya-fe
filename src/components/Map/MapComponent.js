@@ -8,6 +8,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Cloud from "./Cloud";
 import { PROVINCE_MARKERS } from "@/constants/MarkerPositions";
+import AnimatedText from "../AnimatedText";
 
 const MapComponent = () => {
   const [activeProv, setActiveProv] = useState(null);
@@ -25,12 +26,6 @@ const MapComponent = () => {
     [-13.92, 90.01],
     [9.91, 145.97],
   ];
-  const boundsPath = {
-    color: "red",
-    fillColor: "red",
-    fillOpacity: 0,
-    opacity: 0,
-  };
 
   // [Styling GeoJSON]
   const geoJsonStyle = {
@@ -38,7 +33,7 @@ const MapComponent = () => {
     fillOpacity: 0.5, // Transparansi isi
     color: "#8a07fe", // Warna garis batas
     weight: 3, // Tebal garis
-    className: "geo-fade-in", // class buat animasi
+    className: "geo-fade-in z-999", // class buat animasi
   };
 
   return (
@@ -56,7 +51,6 @@ const MapComponent = () => {
       >
         {/* <GeoJSON data={indonesianData} style={geoJsonStyle} /> */}
         <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
-
         {activeProv && (
           <GeoJSON
             key={activeProv.properties.id || Math.random()}
@@ -64,23 +58,33 @@ const MapComponent = () => {
             style={geoJsonStyle}
           />
         )}
+        {PROVINCE_MARKERS.map((prov) => {
+          const isActive =
+            activeProv === indonesianData.features[prov.originalIndex];
 
-        {PROVINCE_MARKERS.map((prov) => (
-          <Marker
-            key={prov.originalIndex}
-            position={prov.position}
-            icon={defaultIcon}
-            eventHandlers={{
-              mouseover: () => {
-                const feature = indonesianData.features[prov.originalIndex];
-                setActiveProv(feature);
-              },
-              mouseout: () => setActiveProv(null),
-            }}
-          >
-            <Popup>{prov.name}</Popup>
-          </Marker>
-        ))}
+          return (
+            <Marker
+              key={prov.originalIndex}
+              position={prov.position}
+              icon={defaultIcon}
+              eventHandlers={{
+                mouseover: (e) => {
+                  const feature = indonesianData.features[prov.originalIndex];
+                  setActiveProv(feature);
+                  e.target.openPopup();
+                },
+                mouseout: (e) => {
+                  setActiveProv(null);
+                  e.target.closePopup();
+                },
+              }}
+            >
+              <Popup className="my-custom-popup" closeButton={false}>
+                {isActive && <AnimatedText text={prov.name} />}
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
       <Cloud />
     </main>
