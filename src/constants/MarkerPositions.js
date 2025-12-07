@@ -5,6 +5,11 @@ export const PROVINCE_MARKERS = [
     position: [3.2224, 116.2116],
     originalIndex: 32,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 2,
@@ -12,6 +17,11 @@ export const PROVINCE_MARKERS = [
     position: [-8.6459, 122.3504],
     originalIndex: 23,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 3,
@@ -19,6 +29,11 @@ export const PROVINCE_MARKERS = [
     position: [-0.1338, 110.2442],
     originalIndex: 36,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 4,
@@ -26,6 +41,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.1381, 138.3365],
     originalIndex: 14,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 5,
@@ -33,6 +53,11 @@ export const PROVINCE_MARKERS = [
     position: [-7.7355, 112.495],
     originalIndex: 19,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 6,
@@ -40,6 +65,11 @@ export const PROVINCE_MARKERS = [
     position: [-4.4896, 129.6517],
     originalIndex: 11,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 7,
@@ -47,6 +77,11 @@ export const PROVINCE_MARKERS = [
     position: [-8.4526, 116.3527],
     originalIndex: 16,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 8,
@@ -54,6 +89,11 @@ export const PROVINCE_MARKERS = [
     position: [-4.3131, 120.0289],
     originalIndex: 2,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 9,
@@ -61,6 +101,11 @@ export const PROVINCE_MARKERS = [
     position: [-7.3021, 109.9844],
     originalIndex: 34,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 10,
@@ -68,13 +113,23 @@ export const PROVINCE_MARKERS = [
     position: [-6.9364, 107.5158],
     originalIndex: 37,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 11,
-    name: "Jakarta Raya", // DKI Jakarta
+    name: "Jakarta Raya",
     position: [-6.1542, 106.8522],
     originalIndex: 10,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 12,
@@ -82,13 +137,23 @@ export const PROVINCE_MARKERS = [
     position: [-6.5856, 105.9175],
     originalIndex: 30,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 13,
-    name: "Daerah Istimewa Yogyakarta", // DIY
+    name: "Daerah Istimewa Yogyakarta",
     position: [-7.9624, 110.4153],
     originalIndex: 8,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 14,
@@ -96,6 +161,11 @@ export const PROVINCE_MARKERS = [
     position: [-3.9613, 122.5003],
     originalIndex: 22,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 15,
@@ -103,6 +173,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.7042, 133.9245],
     originalIndex: 4,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 16,
@@ -110,6 +185,11 @@ export const PROVINCE_MARKERS = [
     position: [-0.9428, 120.6632],
     originalIndex: 0,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 17,
@@ -117,6 +197,11 @@ export const PROVINCE_MARKERS = [
     position: [0.7387, 128.0346],
     originalIndex: 35,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 18,
@@ -124,6 +209,11 @@ export const PROVINCE_MARKERS = [
     position: [0.4511, 104.4992],
     originalIndex: 15,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 19,
@@ -131,6 +221,11 @@ export const PROVINCE_MARKERS = [
     position: [0.6934, 101.7485],
     originalIndex: 6,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 20,
@@ -138,6 +233,11 @@ export const PROVINCE_MARKERS = [
     position: [0.7165, 122.5907],
     originalIndex: 5,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 21,
@@ -145,6 +245,11 @@ export const PROVINCE_MARKERS = [
     position: [1.3076, 124.8958],
     originalIndex: 31,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 22,
@@ -152,6 +257,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.3666, 119.3],
     originalIndex: 1,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 23,
@@ -159,6 +269,11 @@ export const PROVINCE_MARKERS = [
     position: [-1.2856, 103.5025],
     originalIndex: 17,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 24,
@@ -166,6 +281,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.9471, 104.7469],
     originalIndex: 29,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 25,
@@ -173,6 +293,11 @@ export const PROVINCE_MARKERS = [
     position: [-5.2533, 105.1359],
     originalIndex: 13,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 26,
@@ -180,6 +305,11 @@ export const PROVINCE_MARKERS = [
     position: [-4.1991, 102.6226],
     originalIndex: 12,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 27,
@@ -187,6 +317,11 @@ export const PROVINCE_MARKERS = [
     position: [-0.9544, 99.5885],
     originalIndex: 9,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 28,
@@ -194,6 +329,11 @@ export const PROVINCE_MARKERS = [
     position: [2.7404, 99.0723],
     originalIndex: 21,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 29,
@@ -201,6 +341,11 @@ export const PROVINCE_MARKERS = [
     position: [4.7758, 96.4112],
     originalIndex: 25,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 30,
@@ -208,6 +353,11 @@ export const PROVINCE_MARKERS = [
     position: [-1.917, 113.7861],
     originalIndex: 26,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 31,
@@ -215,6 +365,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.9925, 115.3701],
     originalIndex: 24,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 32,
@@ -222,6 +377,11 @@ export const PROVINCE_MARKERS = [
     position: [-8.6141, 115.1781],
     originalIndex: 18,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 33,
@@ -229,6 +389,11 @@ export const PROVINCE_MARKERS = [
     position: [-2.0703, 106.0976],
     originalIndex: 28,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-yellow",
+      fillColor: "#cccc00",
+      strokeColor: "#ffff00",
+    },
   },
   {
     id: 34,
@@ -236,6 +401,11 @@ export const PROVINCE_MARKERS = [
     position: [0.6987, 117.0208],
     originalIndex: 33,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
   {
     id: 35,
@@ -243,6 +413,11 @@ export const PROVINCE_MARKERS = [
     position: [-1.0153, 131.7708],
     originalIndex: 20,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-orange",
+      fillColor: "#cc6600",
+      strokeColor: "#ff8800",
+    },
   },
   {
     id: 36,
@@ -250,6 +425,11 @@ export const PROVINCE_MARKERS = [
     position: [-4.0304, 136.392],
     originalIndex: 3,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-blue",
+      fillColor: "#0066cc",
+      strokeColor: "#0088ff",
+    },
   },
   {
     id: 37,
@@ -257,6 +437,11 @@ export const PROVINCE_MARKERS = [
     position: [-6.8926, 139.4537],
     originalIndex: 7,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-green",
+      fillColor: "#006600",
+      strokeColor: "#00ff00",
+    },
   },
   {
     id: 38,
@@ -264,5 +449,10 @@ export const PROVINCE_MARKERS = [
     position: [-4.1311, 138.9259],
     originalIndex: 27,
     customIcon: "/sumatera.webp",
+    neonColor: {
+      className: "neon-province-cyan",
+      fillColor: "#008b8b",
+      strokeColor: "#00ffff",
+    },
   },
 ];

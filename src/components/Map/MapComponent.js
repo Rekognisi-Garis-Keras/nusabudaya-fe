@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import indonesianData from "../../../public/id.json";
 import { GeoJSON } from "react-leaflet";
@@ -27,13 +27,23 @@ const MapComponent = () => {
     [9.91, 145.97],
   ];
 
-  // [Styling GeoJSON]
-  const geoJsonStyle = {
-    fillColor: "#8a07fe", // Warna isi
-    fillOpacity: 0.5, // Transparansi isi
-    color: "#8a07fe", // Warna garis batas
-    weight: 3, // Tebal garis
-    className: "geo-fade-in z-999", // class buat animasi
+  const getGeoJsonStyle = (originalIndex) => {
+    const province = PROVINCE_MARKERS.find(
+      (p) => p.originalIndex === originalIndex
+    );
+    const color = province?.neonColor || {
+      className: "neon-province",
+      fillColor: "#8a07fe",
+      strokeColor: "#bf5fff",
+    };
+
+    return {
+      fillColor: color.fillColor,
+      fillOpacity: 0.1,
+      color: color.strokeColor,
+      weight: 3,
+      className: `geo-fade-in ${color.className} z-999`,
+    };
   };
 
   return (
@@ -49,13 +59,16 @@ const MapComponent = () => {
         zoomSnap={0.5}
         wheelPxPerZoomLevel={500}
       >
-        {/* <GeoJSON data={indonesianData} style={geoJsonStyle} /> */}
         <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
         {activeProv && (
           <GeoJSON
             key={activeProv.properties.id || Math.random()}
             data={activeProv}
-            style={geoJsonStyle}
+            style={getGeoJsonStyle(
+              PROVINCE_MARKERS.find(
+                (p) => indonesianData.features[p.originalIndex] === activeProv
+              )?.originalIndex
+            )}
           />
         )}
         {PROVINCE_MARKERS.map((prov) => {
