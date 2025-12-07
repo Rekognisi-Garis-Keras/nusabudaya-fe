@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import indonesianData from "../../../public/id.json";
 import { GeoJSON } from "react-leaflet";
@@ -12,11 +12,13 @@ import AnimatedText from "../AnimatedText";
 import SearchProvince from "./SearchProvince";
 import DetailProvince from "./DetailProvince";
 import { getProvinceByName } from "@/constants/listDetail";
+import AudioController from "./AudioController";
 
 const MapComponent = () => {
   const [activeProv, setActiveProv] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const mapRef = useRef(null);
+  const audioRefsRef = useRef(null);
 
   const defaultIcon = L.icon({
     iconUrl: "/sumatera.webp",
@@ -56,9 +58,22 @@ const MapComponent = () => {
     if (prov) handleMarkerClick(prov.position, prov.originalIndex);
   };
 
+  const playSound = (soundType) => {
+    if (!audioRefsRef.current) return;
+
+    const audio = audioRefsRef.current[soundType];
+    if (audio) {
+      if (soundType === "hover" || soundType === "zoom") {
+        audio.currentTime = 0;
+        audio.play().catch((err) => console.log("Gagal memutar audio: ", err));
+      }
+    }
+  };
+
   // Flyto province yang dipilih
   const handleMarkerClick = (position, originalIndex) => {
     if (mapRef.current) {
+      playSound("zoom");
       // Fly to posisi marker
       mapRef.current.flyTo(position, 7, {
         duration: 1.5,
@@ -82,6 +97,10 @@ const MapComponent = () => {
   };
   const handleClosePanel = () => {
     setSelectedProvince(null);
+  };
+
+  const handleAudioRefsReady = (refs) => {
+    audioRefsRef.current = refs;
   };
 
   return (
@@ -124,6 +143,7 @@ const MapComponent = () => {
                 click: () =>
                   handleMarkerClick(prov.position, prov.originalIndex),
                 mouseover: (e) => {
+                  playSound("hover");
                   const feature = indonesianData.features[prov.originalIndex];
                   setActiveProv(feature);
                   e.target.openPopup();
@@ -143,6 +163,7 @@ const MapComponent = () => {
       </MapContainer>
       <Cloud />
       <SearchProvince onProvinceSelect={handleSearchSelect} />
+      <AudioController onAudioRefsReady={handleAudioRefsReady} />
 
       {selectedProvince && (
         <DetailProvince

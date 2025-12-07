@@ -33,7 +33,7 @@ const DetailProvince = ({ province, onClose }) => {
   if (!province) return null;
 
   return (
-    <div className="panel w-[400px] h-screen fixed z-[9999] top-0 left-64 bg-white/90 backdrop-blur-md shadow-2xl border-r border-gray-200 overflow-y-auto p-8 text-slate-800">
+    <div className="panel w-[400px] h-screen fixed z-9999 top-0 left-64 bg-white/90 backdrop-blur-md shadow-2xl border-r border-gray-200 overflow-y-auto p-8 text-slate-800">
       {/* ✨ TOMBOL CLOSE (X) */}
       <button
         onClick={handleCloseClick}
