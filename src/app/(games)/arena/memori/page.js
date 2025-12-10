@@ -2,6 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { Trophy, Clock, Zap, Award, ArrowLeft, Crown } from "lucide-react";
+import MemoriSummary from "@/components/Arena/MemoriSummary";
+import MemoriNav from "@/components/Arena/MemoriNav";
+import MemoriTimer from "@/components/Arena/MemoriTimer";
 
 const Memori = () => {
   // Card data - 8 pairs of matching cards
@@ -20,9 +24,11 @@ const Memori = () => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
-  const [timeLeft, setTimeLeft] = useState(120); // 120 seconds timer
+  const [timeLeft, setTimeLeft] = useState(2); // 120 seconds timer
   const [gameEnded, setGameEnded] = useState(false);
   const [xpEarned, setXpEarned] = useState(0);
+  const [moves, setMoves] = useState(0);
+  const [timeUsed, setTimeUsed] = useState(0);
 
   // Initialize game
   useEffect(() => {
@@ -43,12 +49,13 @@ const Memori = () => {
     if (timeLeft > 0 && !gameEnded) {
       const timer = setTimeout(() => {
         setTimeLeft(timeLeft - 1);
+        setTimeUsed(timeUsed + 1);
       }, 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setGameEnded(true);
     }
-  }, [timeLeft, gameEnded]);
+  }, [timeLeft, gameEnded, timeUsed]);
 
   // Check if all cards are matched
   useEffect(() => {
@@ -72,6 +79,7 @@ const Memori = () => {
     setFlippedCards(newFlippedCards);
 
     if (newFlippedCards.length === 2) {
+      setMoves(moves + 1);
       const [firstId, secondId] = newFlippedCards;
       const firstCard = cards.find((c) => c.uniqueId === firstId);
       const secondCard = cards.find((c) => c.uniqueId === secondId);
@@ -94,59 +102,62 @@ const Memori = () => {
     return flippedCards.includes(uniqueId) || matchedCards.includes(uniqueId);
   };
 
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const calculateAccuracy = () => {
+    if (moves === 0) return 0;
+    const maxPossibleMoves = cardPairs.length;
+    const accuracy = Math.round((maxPossibleMoves / moves) * 100);
+    return Math.min(accuracy, 100);
+  };
+
+  const getPerformanceRating = () => {
+    const isComplete = matchedCards.length === cards.length;
+    const accuracy = calculateAccuracy();
+
+    if (!isComplete) return { text: "Belum Selesai", color: "text-gray-400" };
+    if (accuracy >= 90 && timeUsed <= 60)
+      return { text: "Sempurna!", color: "text-yellow-400" };
+    if (accuracy >= 80 && timeUsed <= 90)
+      return { text: "Hebat!", color: "text-green-400" };
+    if (accuracy >= 70) return { text: "Bagus!", color: "text-blue-400" };
+    return { text: "Cukup Baik", color: "text-purple-400" };
+  };
+
+  // Summary Page Component
+  if (gameEnded) {
+    const isComplete = matchedCards.length === cards.length;
+    const performance = getPerformanceRating();
+    const accuracy = calculateAccuracy();
+
+    return (
+      <MemoriSummary
+        isComplete={isComplete}
+        performance={performance}
+        accuracy={accuracy}
+        xpEarned={xpEarned}
+        formatTime={formatTime}
+        timeUsed={timeUsed}
+        moves={moves}
+        matchedCards={matchedCards}
+        cardPairs={cardPairs}
+      />
+    );
+  }
+
+  // Game Play Screen
   return (
     <main className="min-h-screen w-full bg-[#0D1922] flex flex-col items-center overflow-y-auto">
       {/* navigation bar */}
-      <nav className="w-full h-25 bg-[#1a2832] px-10">
-        <div className="w-[80%] h-full mx-auto flex items-center justify-between">
-          <div className="flex flex-col justify-start">
-            <span className="text-[#c8a668] text-xs uppercase tracking-wider">
-              Kartu Memori
-            </span>
-            <span className="text-2xl text-white font-medium">Jawa Barat</span>
-          </div>
-          <div>
-            <span className="font-medium text-[#c7c7c7] text-lg">
-              Total XP:{" "}
-              <span className="text-[#c8a668] font-bold">{xpEarned}</span>
-            </span>
-          </div>
-          <Link
-            href="#"
-            className="text-red-500 py-1.5 px-4 rounded-lg border border-red-500 bg-red-500/30 hover:bg-red-500/50 transition"
-          >
-            Quit Game
-          </Link>
-        </div>
-      </nav>
+      <MemoriNav xpEarned={xpEarned} />
 
       {/* main layout */}
       <div className="w-full max-w-[900px] min-h-full p-3 md:p-5 mx-auto">
-        <div className="w-full flex flex-col items-start h-16 md:h-20 mt-3 md:mt-5 space-y-3 md:space-y-4">
-          <span className="text-base md:text-lg text-white">
-            Sisa Waktu: {timeLeft} detik
-          </span>
-          <div className="w-full rounded-full h-1.5 bg-gray-700">
-            <div
-              className="h-full rounded-full bg-[#c8a668] transition-all duration-1000"
-              style={{ width: `${(timeLeft / 120) * 100}%` }}
-            ></div>
-          </div>
-        </div>
-
-        {/* Game Over Message */}
-        {gameEnded && (
-          <div className="w-full text-center py-6 md:py-8">
-            <h2 className="text-2xl md:text-3xl text-white font-bold mb-2">
-              {matchedCards.length === cards.length
-                ? "Selamat! 🎉"
-                : "Waktu Habis!"}
-            </h2>
-            <p className="text-lg md:text-xl text-[#c8a668]">
-              Total XP yang didapat: {xpEarned}
-            </p>
-          </div>
-        )}
+        <MemoriTimer timeLeft={timeLeft} />
 
         {/* Card Grid */}
         <div className="w-fit mx-auto grid grid-cols-4 md:grid-cols-4 gap-2 md:gap-3 mt-6 md:mt-8 mb-6 md:mb-8">
