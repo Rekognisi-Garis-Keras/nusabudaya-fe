@@ -1,13 +1,14 @@
 "use client";
 
 import { Volume2, VolumeX } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 const AudioController = ({ onAudioRefsReady }) => {
   const [isMusicOn, setIsMusicOn] = useState(true);
   const backsoundRef = useRef(null);
   const zoomRef = useRef(null);
   const hoverRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     backsoundRef.current = new Audio("/music/backsound.mp3");
@@ -74,8 +75,13 @@ const AudioController = ({ onAudioRefsReady }) => {
     };
   }, []);
 
-  const toggleMusic = async () => {
+  const toggleMusic = useCallback(async () => {
     if (!backsoundRef.current) return;
+
+    if (buttonRef.current) {
+      buttonRef.current.classList.add("scale-90");
+      setTimeout(() => buttonRef.current.classList.remove("scale-90"), 150);
+    }
 
     if (isMusicOn) {
       backsoundRef.current.pause();
@@ -88,12 +94,27 @@ const AudioController = ({ onAudioRefsReady }) => {
         console.log("Failed to play audio: ", err);
       }
     }
-  };
+  }, [isMusicOn]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key.toLowerCase() === "m") {
+        toggleMusic();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [toggleMusic]);
 
   return (
     <button
+      ref={buttonRef}
       onClick={toggleMusic}
-      className="fixed z-1000 right-3 top-3 md:right-5 md:top-3 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md  border border-(--color-secondary) p-2.5 md:p-3  rounded-full  hover:bg-(--color-secondary)  active:scale-95 transition-all duration-300  group shadow-lg"
+      className="fixed z-1000 right-3 top-3 md:right-5 md:top-3 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md  border border-(--color-secondary) p-2.5 md:p-3 rounded-full  hover:bg-(--color-secondary)  active:scale-95 transition-all duration-300 group shadow-lg"
       title={isMusicOn ? "Turn off music" : "Turn on music"}
       aria-label={isMusicOn ? "Turn off music" : "Turn on music"}
     >

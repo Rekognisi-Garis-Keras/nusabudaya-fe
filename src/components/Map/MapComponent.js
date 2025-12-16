@@ -13,15 +13,22 @@ import SearchProvince from "./SearchProvince";
 import DetailProvince from "./DetailProvince";
 import { getProvinceByName } from "@/constants/listDetail";
 import AudioController from "./AudioController";
+import Guide from "./Guide";
+import { CircleQuestionMark } from "lucide-react";
 
 const MapComponent = () => {
   const [activeProv, setActiveProv] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [lastTap, setLastTap] = useState(0);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const mapRef = useRef(null);
   const audioRefsRef = useRef(null);
   const markerRefs = useRef({});
+
+  function handleCloseGuide() {
+    setIsGuideOpen(false);
+  }
 
   // Detect if device is mobile
   useEffect(() => {
@@ -238,6 +245,13 @@ const MapComponent = () => {
       <Cloud />
       <SearchProvince onProvinceSelect={handleSearchSelect} />
       <AudioController onAudioRefsReady={handleAudioRefsReady} />
+      <button
+        onClick={() => setIsGuideOpen(!isGuideOpen)}
+        className="absolute bottom-4 left-4 z-1000 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md border border-(--color-secondary) p-2.5 md:p-3 rounded-full hover:bg-(--color-secondary) active:scale-95 transition-all duration-300 group shadow-lg"
+      >
+        <CircleQuestionMark className="w-5 h-5 md:w-6 md:h-6 stroke-white" />
+      </button>
+      {isGuideOpen && <Guide onClose={handleCloseGuide} />}
 
       {selectedProvince && (
         <DetailProvince
@@ -247,13 +261,13 @@ const MapComponent = () => {
       )}
 
       {/* Mobile Hint - Shows briefly on first load */}
-      {isMobile && (
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-[999] pointer-events-none">
-          <div className="bg-black/80 text-white text-xs px-4 py-2 rounded-full border border-[var(--color-secondary)] animate-pulse-slow">
+      {/* {isMobile && (
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-999 pointer-events-none">
+          <div className="bg-black/80 text-white text-xs px-4 py-2 rounded-full border border-(--color-secondary) animate-pulse-slow">
             Tap: Preview • Double-tap: Details
           </div>
         </div>
-      )}
+      )} */}
     </main>
   );
 };
