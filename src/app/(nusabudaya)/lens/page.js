@@ -1,19 +1,19 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { Camera, Upload, X, RefreshCw } from "lucide-react"; // Nambah icon X untuk close camera
+import { Camera, Upload, X } from "lucide-react";
 import HeaderSection from "@/components/HeaderSection";
 import InfoCard from "@/components/Lens/InfoCard";
 import UploadPlaceholder from "@/components/Lens/UploadPlaceholder";
 import AiResponse from "@/components/Lens/AiResponse";
 import LoadingResult from "@/components/Lens/LoadingResult";
 import PreviewImage from "@/components/Lens/PreviewImage";
+import { apiRequest } from "@/utils/api";
 
 const NusaBudayaLens = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [aiResponse, setAiResponse] = useState(null);
 
-  // State untuk Camera Desktop
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -22,7 +22,6 @@ const NusaBudayaLens = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // 1. Detect Mobile Device saat component mount 📱
   useEffect(() => {
     const checkMobile = () => {
       const userAgent =
@@ -37,7 +36,6 @@ const NusaBudayaLens = () => {
     checkMobile();
   }, []);
 
-  // 2. Handle Start Camera Stream (Desktop) 🎥
   useEffect(() => {
     let stream = null;
 
@@ -62,7 +60,6 @@ const NusaBudayaLens = () => {
       startCamera();
     }
 
-    // Cleanup function: Matikan kamera saat component unmount atau isCameraOpen jadi false
     return () => {
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
@@ -76,81 +73,72 @@ const NusaBudayaLens = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setUploadedImage(reader.result);
-        analyzeImage(reader.result);
       };
       reader.readAsDataURL(file);
+
+      analyzeImage(file);
     }
   };
 
-  // 3. Logic Tombol "Ambil Foto" 🔘
   const handleCameraClick = () => {
     if (isMobile) {
-      // Kalau Mobile: Buka native camera via input file
       cameraInputRef.current?.click();
     } else {
-      // Kalau Desktop: Buka mode webcam di browser
       setIsCameraOpen(true);
     }
   };
 
-  // 4. Capture Foto dari Webcam Desktop 📸
   const handleCapture = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
 
     if (video && canvas) {
-      // Set ukuran canvas sesuai video
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
       const context = canvas.getContext("2d");
-      // Flip horizontal kalau mau efek cermin (opsional), di sini kita normal aja
-      // context.translate(canvas.width, 0);
-      // context.scale(-1, 1);
-
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setUploadedImage(imageDataUrl);
-      setIsCameraOpen(false); // Tutup kamera setelah capture
-      analyzeImage(imageDataUrl);
+      setIsCameraOpen(false);
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          analyzeImage(blob);
+        }
+      }, "image/jpeg");
     }
   };
 
-  const analyzeImage = async (imageData) => {
+  const analyzeImage = async (imageFile) => {
     setIsAnalyzing(true);
     setAiResponse(null);
 
-    // Simulate AI analysis
-    setTimeout(() => {
-      setAiResponse({
-        category: "Tarian Tradisional",
-        name: "Tari Jaipong",
-        province: "Jawa Barat",
-        description:
-          "Tari Jaipong adalah tarian rakyat modern dari Jawa Barat yang diciptakan oleh Gugum Gumbira pada tahun 1976. Tarian ini menggabungkan unsur-unsur dari berbagai tarian tradisional Sunda seperti Ketuk Tilu, Ronggeng, dan Topeng Banjet.",
-        confidence: 94,
-        culturalMeaning:
-          "Tari Jaipong merupakan simbol kebebasan berekspresi dan kreativitas masyarakat Sunda. Filosofi di balik tarian ini adalah 'ngigel' atau bergoyang mengikuti irama kehidupan, mencerminkan sifat masyarakat Sunda yang ramah, terbuka, dan penuh kegembiraan. Gerakan-gerakannya melambangkan dinamika kehidupan yang selalu berubah namun tetap harmonis.",
-        mainCharacteristic: [
-          "Gerakan pinggul yang dinamis dan ekspresif (geol)",
-          "Diiringi musik gamelan dengan tempo cepat dan energik",
-          "Menggunakan kostum kebaya dan selendang berwarna cerah",
-          "Ekspresi wajah yang ceria dan penuh semangat",
-          "Improvisasi gerakan yang spontan dan kreatif",
-        ],
-        history:
-          "Tari Jaipong diciptakan oleh seniman Gugum Gumbira pada tahun 1976 di Bandung, Jawa Barat. Awalnya, tarian ini dikembangkan sebagai upaya untuk memodernisasi tarian tradisional Sunda agar lebih diterima oleh generasi muda. Nama 'Jaipong' sendiri berasal dari bunyi instrumen gamelan yang mengiringi tarian ini. Sejak kemunculannya, Tari Jaipong dengan cepat menjadi populer dan telah dipentaskan di berbagai negara sebagai representasi budaya Indonesia.",
-        relatedCultures: [
-          "Tari Ketuk Tilu",
-          "Tari Ronggeng",
-          "Musik Degung",
-          "Tari Topeng Banjet",
-          "Gamelan Sunda",
-        ],
+    try {
+      const formData = new FormData();
+      const fileName = imageFile.name || "camera-capture.jpg";
+      formData.append("image", imageFile, fileName);
+
+      const response = await apiRequest("/ai/lens", {
+        method: "POST",
+        body: formData,
+        isFormData: true,
       });
+
+      if (response && response.status === "success") {
+        setAiResponse(response.data);
+      } else {
+        throw new Error(response.message || "Gagal mendapatkan analisis AI");
+      }
+    } catch (error) {
+      console.error("Gagal menganalisis gambar:", error);
+      alert(
+        "Maaf, terjadi kesalahan saat menganalisis gambar. Silakan coba lagi."
+      );
+    } finally {
       setIsAnalyzing(false);
-    }, 2000);
+    }
   };
 
   const handleReset = () => {
@@ -188,7 +176,7 @@ const NusaBudayaLens = () => {
                     />
                     <canvas ref={canvasRef} className="hidden" />
 
-                    {/* Overlay Guide Lines (Optional aesthetics) */}
+                    {/* Overlay Guide Lines */}
                     <div className="absolute inset-0 border-[3px] border-white/20 m-8 rounded-lg pointer-events-none"></div>
                   </div>
 
