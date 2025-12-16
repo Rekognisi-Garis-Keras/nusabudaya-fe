@@ -1,14 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Camera,
-  Upload,
-  X,
-  RefreshCw,
-  Info,
-  BookAlert,
-  SearchX,
-} from "lucide-react"; // Nambah icon X untuk close camera
+import { Camera, Upload, X } from "lucide-react";
 import HeaderSection from "@/components/HeaderSection";
 import InfoCard from "@/components/Lens/InfoCard";
 import UploadPlaceholder from "@/components/Lens/UploadPlaceholder";
@@ -23,6 +15,7 @@ const NusaBudayaLens = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [aiResponse, setAiResponse] = useState(null);
 
+  // State untuk Camera Desktop
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -31,6 +24,7 @@ const NusaBudayaLens = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
+  // 1. Detect Mobile Device saat component mount 📱
   useEffect(() => {
     const checkMobile = () => {
       const userAgent =
@@ -45,6 +39,7 @@ const NusaBudayaLens = () => {
     checkMobile();
   }, []);
 
+  // 2. Handle Start Camera Stream (Desktop) 🎥
   useEffect(() => {
     let stream = null;
 
@@ -69,6 +64,7 @@ const NusaBudayaLens = () => {
       startCamera();
     }
 
+    // Cleanup function: Matikan kamera saat component unmount atau isCameraOpen jadi false
     return () => {
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
@@ -79,39 +75,48 @@ const NusaBudayaLens = () => {
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      // 1. Buat preview image (Base64) untuk ditampilkan di UI
       const reader = new FileReader();
       reader.onloadend = () => {
         setUploadedImage(reader.result);
       };
       reader.readAsDataURL(file);
 
+      // 2. Langsung kirim object File asli ke backend
       analyzeImage(file);
     }
   };
 
+  // 3. Logic Tombol "Ambil Foto" 🔘
   const handleCameraClick = () => {
     if (isMobile) {
+      // Kalau Mobile: Buka native camera via input file
       cameraInputRef.current?.click();
     } else {
+      // Kalau Desktop: Buka mode webcam di browser
       setIsCameraOpen(true);
     }
   };
 
+  // 4. Capture Foto dari Webcam Desktop 📸
   const handleCapture = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
 
     if (video && canvas) {
+      // Set ukuran canvas sesuai video
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
       const context = canvas.getContext("2d");
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+      // 1. Set Preview (DataURL untuk UI)
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       setUploadedImage(imageDataUrl);
       setIsCameraOpen(false);
 
+      // 2. Konversi Canvas ke Blob untuk dikirim ke API
       canvas.toBlob((blob) => {
         if (blob) {
           analyzeImage(blob);
@@ -120,19 +125,22 @@ const NusaBudayaLens = () => {
     }
   };
 
+  // Fungsi Kirim ke Backend
   const analyzeImage = async (imageFile) => {
     setIsAnalyzing(true);
     setAiResponse(null);
 
     try {
       const formData = new FormData();
+      // Gunakan nama file asli jika ada, atau default name jika dari blob kamera
       const fileName = imageFile.name || "camera-capture.jpg";
       formData.append("image", imageFile, fileName);
 
+      // Hit API Endpoint /ai/lens
       const response = await apiRequest("/ai/lens", {
         method: "POST",
         body: formData,
-        isFormData: true,
+        isFormData: true, // Flag agar utils tidak menimpa Content-Type
       });
 
       if (response && response.status === "success") {
@@ -167,21 +175,6 @@ const NusaBudayaLens = () => {
           sectionTitle="NusaLens AI"
           description="Upload atau ambil foto objek budaya Indonesia untuk mendapatkan informasi lengkap dan detail dari AI kami."
         />
-
-        <div className="w-full p-4 border border-(--color-secondary) bg-(--color-secondary)/25 mb-5 -mt-3 rounded-xl">
-          <div className="flex items-center gap-3 mb-2">
-            <BookAlert className="stroke-(--color-secondary) w-5 h-5" />
-            <span className="uppercase text-(--color-secondary) font-bold tracking-wide">
-              Disclaimer
-            </span>
-          </div>
-          <p className="text-(--color-secondary)">
-            NusaLens AI masih dalam tahap pengembangan dan penyempurnaan.
-            Informasi yang dihasilkan bersifat referensi dan mungkin belum
-            sepenuhnya akurat. Kami menyarankan pengguna untuk memverifikasi
-            kembali informasi dengan sumber tepercaya.
-          </p>
-        </div>
 
         {/* Main Content */}
         <div className="w-full">
@@ -275,10 +268,10 @@ const NusaBudayaLens = () => {
               <PreviewImage image={uploadedImage} onReset={handleReset} />
 
               {/* AI Analysis Result */}
-              {!isAnalyzing ? (
+              {isAnalyzing ? (
                 <LoadingResult />
               ) : aiResponse && aiResponse.isCultural === false ? (
-                <NotCulture />
+                  <NotCulture />
               ) : (
                 aiResponse && (
                   <AiResponse response={aiResponse} onReset={handleReset} />
@@ -288,7 +281,7 @@ const NusaBudayaLens = () => {
           )}
         </div>
         {/* Examples Section - Only show when no image uploaded */}
-        {false && (
+        {!uploadedImage && (
           <div className="mt-12">
             <div className="flex items-center gap-2 mb-6">
               <div className="h-7 border-2 rounded-full border-[#c8a668]"></div>

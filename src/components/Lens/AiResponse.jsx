@@ -59,7 +59,7 @@ const AiResponse = ({ response, onReset }) => {
           <Camera className="w-5 h-5" />
           Analisis Gambar Baru
         </button>
-        <Link href={`https://google.com/search?q=${response.name}`} className="flex-1 bg-[#c8a668] hover:bg-[#d4b876] text-[#0D1922] font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+        <Link href={`https://google.com/search?q=${response.name}%20${response.province}`} target="_blank" className="flex-1 bg-[#c8a668] hover:bg-[#d4b876] text-[#0D1922] font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
           <Sparkles className="w-5 h-5" />
           Pelajari Lebih Lanjut
         </Link>
