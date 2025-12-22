@@ -23,13 +23,13 @@ const GoldEmblem = () => {
         strokeMiterlimit: 10,
       });
 
-      gsap.from(split.chars, {
-        y: 10,
-        opacity: 0,
-        stagger: 0.1,
-        repeat: -1,
-        repeatDelay: 1,
-      });
+      // gsap.from(split.chars, {
+      //   y: 10,
+      //   opacity: 0,
+      //   stagger: 0.1,
+      //   repeat: -1,
+      //   repeatDelay: 1,
+      // });
 
       const tl = gsap.timeline({
         repeat: -1, // Ulang terus tanpa henti
@@ -42,15 +42,25 @@ const GoldEmblem = () => {
         duration: 3, // Aku lamain dikit biar elegan
         drawSVG: 0,
         stagger: 0.1, // Stagger lebih cepet dikit
-      }).to(
-        paths,
-        {
-          fill: goldColor,
-          stroke: "transparent",
-          duration: 1,
-        },
-        "-=1"
-      ); // Overlap dikit biar smooth
+      })
+        .from(
+          split.chars,
+          {
+            y: 10,
+            opacity: 0,
+            stagger: 0.1,
+          },
+          "<"
+        )
+        .to(
+          paths,
+          {
+            fill: goldColor,
+            stroke: "transparent",
+            duration: 1,
+          },
+          "-=1"
+        ); // Overlap dikit biar smooth
     },
     { scope: container }
   );
