@@ -39,31 +39,52 @@ const VisualPreview = () => (
 );
 
 // 🧩 Visual buat game Pengetahuan
-const QuizPreview = () => (
-  <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
-    {/* 📦 Wrapper buat box A-D biar tetep horizontal */}
-    <div className="flex items-center justify-center gap-2">
-      <div className="w-10 h-10 bg-white/10 group-hover:bg-white rounded-lg flex items-center justify-center group-hover:-translate-y-5 transition-all duration-300 delay-75 text-black/0 group-hover:text-black font-bold">
-        A
+const QuizPreview = () => {
+  const options = [
+    { label: "A", delay: "delay-0" },
+    { label: "B", delay: "delay-75", correct: true }, // Si 'B' kita bikin spesial
+    { label: "C", delay: "delay-150" },
+    { label: "D", delay: "delay-300" },
+  ];
+
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-2">
+        {options.map((opt) => (
+          <div
+            key={opt.label}
+            className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold transition-all duration-300
+              ${
+                opt.correct
+                  ? "bg-(--color-secondary)/20 text-(--color-secondary)"
+                  : "bg-white/10 text-white"
+              }
+              animate-quiz-loop lg:animate-none ${opt.delay}
+              lg:group-hover:-translate-y-5 
+              ${
+                opt.correct
+                  ? "lg:group-hover:bg-(--color-secondary) lg:group-hover:text-black lg:group-hover:shadow-[0_0_15px_rgba(200,166,104,0.6)]"
+                  : "lg:group-hover:bg-white lg:group-hover:text-black"
+              }
+            `}
+          >
+            {opt.label}
+          </div>
+        ))}
       </div>
-      <div className="w-10 h-10 bg-(--color-secondary)/20 rounded-lg flex items-center justify-center group-hover:-translate-y-8 group-hover:bg-(--color-secondary) group-hover:drop-shadow-[0_0_15px_rgba(200,166,104,0.8)] transition-all duration-300 text-black/0 group-hover:text-black font-bold">
-        B
-      </div>
-      <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:-translate-y-5 transition-all group-hover:bg-white duration-300 delay-150 text-black/0 group-hover:text-black font-bold">
-        C
-      </div>
-      <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:-translate-y-5 transition-all group-hover:bg-white duration-300 delay-250 text-black/0 group-hover:text-black font-bold">
-        D
-      </div>
+
+      {/* 📝 Teks Reveal */}
+      <span
+        className="text-white/60 text-xs font-medium tracking-widest uppercase
+                      /* 🔄 Pulse di HP, Reveal di Laptop */
+                      animate-pulse md:animate-none md:opacity-0 md:translate-y-2 
+                      md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500"
+      >
+        Jawaban Benar!
+      </span>
     </div>
-
-    {/* 📝 Teks sekarang otomatis di bawah karena parent-nya flex-col */}
-    <span className="text-white/60 text-sm font-medium tracking-wide group-hover:text-(--color-secondary) duration-300 translate-y-5 group-hover:translate-y-0 transition-all opacity-0 group-hover:opacity-100 ">
-      Jawaban Benar!
-    </span>
-  </div>
-);
-
+  );
+};
 const previewComponents = {
   ingatan: <MemoryPreview />,
   visual: <VisualPreview />,

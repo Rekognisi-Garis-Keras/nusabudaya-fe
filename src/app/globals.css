@@ -10,8 +10,8 @@
 @import "tailwindcss";
 
 @theme {
-  --animate-memory-left: float-left 2s ease-out infinite;
-  --animate-memory-right: float-right 2s ease-out infinite;
+  --animate-memory-left: float-left 3s ease-in infinite;
+  --animate-memory-right: float-right 3s ease-in infinite;
   --animate-quiz-loop: quiz-bounce 2s ease-in-out infinite;
   --animate-visual-loop: fade-blur 3s ease-in-out infinite;
 

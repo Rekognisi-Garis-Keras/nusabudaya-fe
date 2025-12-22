@@ -21,4 +21,14 @@ export const LIST_SIDEBAR = [
     path: "/mockup",
     label: "Mockup Batik",
   },
+  {
+    icon: Shirt,
+    path: "/mockup",
+    label: "Mockup Batik",
+  },
+  {
+    icon: Shirt,
+    path: "/mockup",
+    label: "Mockup Batik",
+  },
 ];
