@@ -4,9 +4,13 @@ import React, { useState } from "react";
 import { ChevronLeft, X } from "lucide-react"; // Optional: Buat tombol close kalau mau
 import CardBudaya from "./CardBudaya";
 import DetailInfoProvince from "./DetailInfoProvince";
+import { Cultures } from "./Cultures";
+import { formatDate } from "@/utils/date";
 
 const DetailProvince = ({ province, onClose }) => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [detail, setDetail] = useState(null);
+  const [title, setTitle] = useState(null);
   const openClipPath = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
   const closedClipPath = "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)";
   useGSAP(() => {
@@ -51,7 +55,7 @@ const DetailProvince = ({ province, onClose }) => {
         <div>
           <p className="text-left text-white">Detail budaya</p>
           <h2 className="text-3xl font-bold text-(--color-secondary) mb-1">
-            {province.namaProvinsi}
+            {province.name}
           </h2>
         </div>
 
@@ -60,16 +64,16 @@ const DetailProvince = ({ province, onClose }) => {
         {/* --- INFO UTAMA --- */}
         <div className="space-y-3 mb-8">
           <div className="flex justify-between">
-            <span className="font-medium text-white">Ibu Kota:</span>
-            <span className="text-white">{province.ibuKotaProvinsi}</span>
+            <span className="font-medium text-white">Ibu Kota</span>
+            <span className="text-amber-100">{province.capital_city}</span>
           </div>
           <div className="flex justify-between text-white">
-            <span className="font-medium">Luas Wilayah:</span>
-            <span>{province.luas}</span>
+            <span className="font-medium">Luas Wilayah</span>
+            <span className="text-amber-100">{province.area_km2}</span>
           </div>
           <div className="flex justify-between text-white">
-            <span className="font-medium">Populasi:</span>
-            <span>{province.population} Jiwa</span>
+            <span className="font-medium">Berdiri sejak</span>
+            <span className="text-amber-100">{formatDate(province.anniversary_date)}</span>
           </div>
         </div>
 
@@ -78,17 +82,87 @@ const DetailProvince = ({ province, onClose }) => {
           <h5 className="text-xl font-bold text-white ">Budaya</h5>
         </div>
 
-        {/* List budaya */}
         <div className="flex flex-col gap-4">
-          <CardBudaya openInfo={setIsInfoOpen} name={province.rumahAdat} />
-          <CardBudaya
+          {/* ==== Rumah Adat ==== */}
+          <Cultures
             openInfo={setIsInfoOpen}
-            name={province.tarianTradisional}
+            setDetail={setDetail}
+            title="Rumah Adat"
+            setTitle={setTitle}
+            data={province.traditionalHouses}
+          />
+          
+          {/* ==== Tari Tradisional ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Tari Tradisional"
+            setTitle={setTitle}
+            data={province.traditionalDances}
+          />
+          
+          {/* ==== Senjata Tradisional ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Senjata Tradisional"
+            setTitle={setTitle}
+            data={province.traditionalWeapons}
+          />
+          
+          {/* ==== Kuliner ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Kuliner"
+            setTitle={setTitle}
+            data={province.culinaries}
+          />
+          
+          {/* ==== Musik Tradisional ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Musik Tradisional"
+            setTitle={setTitle}
+            data={province.musicalInstruments}
+          />
+          
+          {/* ==== Lagu Daerah ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Lagu Daerah"
+            setTitle={setTitle}
+            data={province.regionalSongs}
+          />
+          
+          {/* ==== Tradisi ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Tradisi"
+            setTitle={setTitle}
+            data={province.traditions}
+          />
+          
+          {/* ==== Spot Wisata ==== */}
+          <Cultures
+            openInfo={setIsInfoOpen}
+            setDetail={setDetail}
+            title="Spot Wisata"
+            setTitle={setTitle}
+            data={province.tourismSpots}
           />
         </div>
       </div>
       {isInfoOpen && (
-        <DetailInfoProvince openInfo={setIsInfoOpen} province={province} />
+        <DetailInfoProvince 
+          detail={detail}
+          context={title}
+          openInfo={setIsInfoOpen} 
+          province={province} 
+        />
       )}
     </>
   );

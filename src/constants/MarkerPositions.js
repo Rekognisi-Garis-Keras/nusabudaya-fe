@@ -2,6 +2,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 1,
     name: "Kalimantan Utara",
+    slug: "kalimantan-utara",
     position: [3.2224, 116.2116],
     originalIndex: 32,
     customIcon: "/sumatera.webp",
@@ -14,6 +15,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 2,
     name: "Nusa Tenggara Timur",
+    slug: "nusa-tenggara-timur",
     position: [-8.6459, 122.3504],
     originalIndex: 23,
     customIcon: "/sumatera.webp",
@@ -26,6 +28,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 3,
     name: "Kalimantan Barat",
+    slug: "kalimantan-barat",
     position: [-0.1338, 110.2442],
     originalIndex: 36,
     customIcon: "/sumatera.webp",
@@ -38,6 +41,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 4,
     name: "Papua",
+    slug: "papua",
     position: [-2.1381, 138.3365],
     originalIndex: 14,
     customIcon: "/sumatera.webp",
@@ -50,6 +54,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 5,
     name: "Jawa Timur",
+    slug: "jawa-timur",
     position: [-7.7355, 112.495],
     originalIndex: 19,
     customIcon: "/sumatera.webp",
@@ -62,6 +67,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 6,
     name: "Maluku",
+    slug: "maluku",
     position: [-4.4896, 129.6517],
     originalIndex: 11,
     customIcon: "/sumatera.webp",
@@ -74,6 +80,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 7,
     name: "Nusa Tenggara Barat",
+    slug: "nusa-tenggara-barat",
     position: [-8.4526, 116.3527],
     originalIndex: 16,
     customIcon: "/sumatera.webp",
@@ -86,6 +93,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 8,
     name: "Sulawesi Selatan",
+    slug: "sulawesi-selatan",
     position: [-4.3131, 120.0289],
     originalIndex: 2,
     customIcon: "/sumatera.webp",
@@ -98,6 +106,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 9,
     name: "Jawa Tengah",
+    slug: "jawa-tengah",
     position: [-7.3021, 109.9844],
     originalIndex: 34,
     customIcon: "/sumatera.webp",
@@ -110,6 +119,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 10,
     name: "Jawa Barat",
+    slug: "jawa-barat",
     position: [-6.9364, 107.5158],
     originalIndex: 37,
     customIcon: "/sumatera.webp",
@@ -122,6 +132,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 11,
     name: "Jakarta Raya",
+    slug: "jakarta-raya",
     position: [-6.1542, 106.8522],
     originalIndex: 10,
     customIcon: "/sumatera.webp",
@@ -134,6 +145,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 12,
     name: "Banten",
+    slug: "banten",
     position: [-6.5856, 105.9175],
     originalIndex: 30,
     customIcon: "/sumatera.webp",
@@ -146,6 +158,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 13,
     name: "Daerah Istimewa Yogyakarta",
+    slug: "daerah-istimewa-yogyakarta",
     position: [-7.9624, 110.4153],
     originalIndex: 8,
     customIcon: "/sumatera.webp",
@@ -158,6 +171,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 14,
     name: "Sulawesi Tenggara",
+    slug: "sulawesi-tenggara",
     position: [-3.9613, 122.5003],
     originalIndex: 22,
     customIcon: "/sumatera.webp",
@@ -170,6 +184,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 15,
     name: "Papua Barat",
+    slug: "papua-barat",
     position: [-2.7042, 133.9245],
     originalIndex: 4,
     customIcon: "/sumatera.webp",
@@ -182,6 +197,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 16,
     name: "Sulawesi Tengah",
+    slug: "sulawesi-tengah",
     position: [-0.9428, 120.6632],
     originalIndex: 0,
     customIcon: "/sumatera.webp",
@@ -194,6 +210,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 17,
     name: "Maluku Utara",
+    slug: "maluku-utara",
     position: [0.7387, 128.0346],
     originalIndex: 35,
     customIcon: "/sumatera.webp",
@@ -206,6 +223,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 18,
     name: "Kepulauan Riau",
+    slug: "kepulauan-riau",
     position: [0.4511, 104.4992],
     originalIndex: 15,
     customIcon: "/sumatera.webp",
@@ -218,6 +236,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 19,
     name: "Riau",
+    slug: "riau",
     position: [0.6934, 101.7485],
     originalIndex: 6,
     customIcon: "/sumatera.webp",
@@ -230,6 +249,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 20,
     name: "Gorontalo",
+    slug: "gorontalo",
     position: [0.7165, 122.5907],
     originalIndex: 5,
     customIcon: "/sumatera.webp",
@@ -242,6 +262,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 21,
     name: "Sulawesi Utara",
+    slug: "sulawesi-utara",
     position: [1.3076, 124.8958],
     originalIndex: 31,
     customIcon: "/sumatera.webp",
@@ -254,6 +275,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 22,
     name: "Sulawesi Barat",
+    slug: "sulawesi-barat",
     position: [-2.3666, 119.3],
     originalIndex: 1,
     customIcon: "/sumatera.webp",
@@ -266,6 +288,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 23,
     name: "Jambi",
+    slug: "jambi",
     position: [-1.2856, 103.5025],
     originalIndex: 17,
     customIcon: "/sumatera.webp",
@@ -278,6 +301,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 24,
     name: "Sumatera Selatan",
+    slug: "sumatera-selatan",
     position: [-2.9471, 104.7469],
     originalIndex: 29,
     customIcon: "/sumatera.webp",
@@ -290,6 +314,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 25,
     name: "Lampung",
+    slug: "lampung",
     position: [-5.2533, 105.1359],
     originalIndex: 13,
     customIcon: "/sumatera.webp",
@@ -302,6 +327,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 26,
     name: "Bengkulu",
+    slug: "bengkulu",
     position: [-4.1991, 102.6226],
     originalIndex: 12,
     customIcon: "/sumatera.webp",
@@ -314,6 +340,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 27,
     name: "Sumatera Barat",
+    slug: "sumatera-barat",
     position: [-0.9544, 99.5885],
     originalIndex: 9,
     customIcon: "/sumatera.webp",
@@ -326,6 +353,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 28,
     name: "Sumatera Utara",
+    slug: "sumatera-utara",
     position: [2.7404, 99.0723],
     originalIndex: 21,
     customIcon: "/sumatera.webp",
@@ -338,6 +366,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 29,
     name: "Aceh",
+    slug: "aceh",
     position: [4.7758, 96.4112],
     originalIndex: 25,
     customIcon: "/sumatera.webp",
@@ -350,6 +379,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 30,
     name: "Kalimantan Tengah",
+    slug: "kalimantan-tengah",
     position: [-1.917, 113.7861],
     originalIndex: 26,
     customIcon: "/sumatera.webp",
@@ -362,6 +392,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 31,
     name: "Kalimantan Selatan",
+    slug: "kalimantan-selatan",
     position: [-2.9925, 115.3701],
     originalIndex: 24,
     customIcon: "/sumatera.webp",
@@ -374,6 +405,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 32,
     name: "Bali",
+    slug: "bali",
     position: [-8.6141, 115.1781],
     originalIndex: 18,
     customIcon: "/sumatera.webp",
@@ -386,6 +418,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 33,
     name: "Kepulauan Bangka Belitung",
+    slug: "kepulauan-bangka-belitung",
     position: [-2.0703, 106.0976],
     originalIndex: 28,
     customIcon: "/sumatera.webp",
@@ -398,6 +431,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 34,
     name: "Kalimantan Timur",
+    slug: "kalimantan-timur",
     position: [0.6987, 117.0208],
     originalIndex: 33,
     customIcon: "/sumatera.webp",
@@ -410,6 +444,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 35,
     name: "Papua Barat Daya",
+    slug: "papua-barat-daya",
     position: [-1.0153, 131.7708],
     originalIndex: 20,
     customIcon: "/sumatera.webp",
@@ -422,6 +457,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 36,
     name: "Papua Tengah",
+    slug: "papua-tengah",
     position: [-4.0304, 136.392],
     originalIndex: 3,
     customIcon: "/sumatera.webp",
@@ -434,6 +470,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 37,
     name: "Papua Selatan",
+    slug: "papua-selatan",
     position: [-6.8926, 139.4537],
     originalIndex: 7,
     customIcon: "/sumatera.webp",
@@ -446,6 +483,7 @@ export const PROVINCE_MARKERS = [
   {
     id: 38,
     name: "Papua Pegunungan",
+    slug: "papua-pegunungan",
     position: [-4.1311, 138.9259],
     originalIndex: 27,
     customIcon: "/sumatera.webp",

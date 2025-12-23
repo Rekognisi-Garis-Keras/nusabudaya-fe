@@ -15,6 +15,7 @@ import { getProvinceByName } from "@/constants/listDetail";
 import AudioController from "./AudioController";
 import Guide from "./Guide";
 import { CircleQuestionMark } from "lucide-react";
+import { provinceService } from "@/services/modules/province.service";
 
 const MapComponent = () => {
   const [activeProv, setActiveProv] = useState(null);
@@ -92,7 +93,7 @@ const MapComponent = () => {
 
   // Desktop: Click to fly and show detail
   // Mobile: Double-click to fly and show detail
-  const handleMarkerClick = (position, originalIndex) => {
+  const handleMarkerClick = async (position, originalIndex) => {
     if (mapRef.current) {
       playSound("zoom");
       mapRef.current.flyTo(position, 7, {
@@ -108,8 +109,9 @@ const MapComponent = () => {
       );
 
       if (provinceData) {
-        const DetailData = getProvinceByName({ name: provinceData.name });
-        setSelectedProvince(DetailData);
+        const detail = await provinceService.getBySlug(provinceData.slug);
+        console.log(detail);
+        setSelectedProvince(detail);
       }
     }
   };
