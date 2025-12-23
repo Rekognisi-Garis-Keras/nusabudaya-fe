@@ -1,7 +1,11 @@
+import { formatDate } from "@/utils/date";
 import { ChevronLeft, X } from "lucide-react";
 import React from "react";
 
-const DetailInfoProvince = ({ province, openInfo }) => {
+const DetailInfoProvince = ({ context, detail, province, openInfo }) => {
+  const title = detail.name || detail.title;
+  const description = detail.description || detail.lyrics;
+  
   return (
     <>
       {/* Backdrop */}
@@ -24,8 +28,8 @@ const DetailInfoProvince = ({ province, openInfo }) => {
                 <ChevronLeft className="stroke-white w-5 h-5" />
               </button>
               <h2 className="text-base md:text-xl font-semibold text-white truncate">
-                Informasi Budaya {province.namaProvinsi}
-              </h2>
+                {title} - {province.name}
+              </h2>;
             </div>
           </div>
 
@@ -33,9 +37,9 @@ const DetailInfoProvince = ({ province, openInfo }) => {
           <div className="flex-1 overflow-y-auto overscroll-contain">
             <div className="p-4 md:p-6 space-y-6 md:space-y-8">
               {/* Province Title */}
-              <h1 className="text-2xl md:text-3xl text-white font-bold">
-                Provinsi {province.namaProvinsi}
-              </h1>
+              {/* <h1 className="text-2xl md:text-3xl text-white font-bold">
+                Provinsi {province.name}
+              </h1> */}
 
               {/* Info Grid */}
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
@@ -44,7 +48,7 @@ const DetailInfoProvince = ({ province, openInfo }) => {
                   <div className="aspect-square bg-white/5 rounded-lg p-4 flex items-center justify-center">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Coat_of_arms_of_Jakarta.svg/375px-Coat_of_arms_of_Jakarta.svg.png"
-                      alt={`${province.namaProvinsi} emblem`}
+                      alt={`${province.name} emblem`}
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -61,7 +65,7 @@ const DetailInfoProvince = ({ province, openInfo }) => {
                         Ibu Kota:
                       </span>
                       <span className="text-white font-medium text-sm md:text-base">
-                        {province.ibuKotaProvinsi}
+                        {province.capital_city}
                       </span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 py-2 border-b border-white/10">
@@ -69,15 +73,15 @@ const DetailInfoProvince = ({ province, openInfo }) => {
                         Luas Wilayah:
                       </span>
                       <span className="text-white font-medium text-sm md:text-base">
-                        {province.luas}
+                        {province.area_km2}
                       </span>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-4 py-2 border-b border-white/10">
                       <span className="font-medium text-white/80 text-sm md:text-base">
-                        Populasi:
+                        Berdiri sejak:
                       </span>
                       <span className="text-white font-medium text-sm md:text-base">
-                        {province.population} Jiwa
+                        {formatDate(province.anniversary_date)}
                       </span>
                     </div>
                   </div>
@@ -89,10 +93,6 @@ const DetailInfoProvince = ({ province, openInfo }) => {
 
               {/* Culture Section */}
               <div>
-                <h2 className="text-xl md:text-2xl text-white font-bold mb-6">
-                  Budaya {province.namaProvinsi}
-                </h2>
-
                 {/* Culture Card */}
                 <div className="flex flex-col gap-6">
                   {/* Image */}
@@ -108,20 +108,17 @@ const DetailInfoProvince = ({ province, openInfo }) => {
 
                   {/* Text Content */}
                   <div className="space-y-4">
-                    <div>
+                    <div className="text-center">
                       <h3 className="text-[#f2ecd5] text-3xl md:text-4xl lg:text-5xl serif mb-2">
-                        {province.tarianTradisional}
+                        {title}
                       </h3>
                       <span className="uppercase text-xs md:text-sm tracking-widest text-white/70 font-semibold">
-                        {province.namaProvinsi}
+                        {context}
                       </span>
                     </div>
 
                     <p className="text-[#c7c7c7] text-sm md:text-base leading-relaxed text-justify">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Repellendus, facere a dolor nobis, quas officiis dolorem
-                      quibusdam magnam modi quod ipsam, numquam non saepe
-                      consequuntur eligendi quo quaerat placeat neque.
+                      {description}
                     </p>
                   </div>
                 </div>
