@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { LIST_SIDEBAR } from "@/constants/listSidebar";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
+import SidebarUser from "./SidebarUser";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden md:block w-64 p-5 h-full bg-(--color-primary) border-r border-(--color-secondary) fixed">
+      <div className="hidden md:flex flex-col w-64 p-5 h-full bg-(--color-primary) border-r border-(--color-secondary) fixed">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2">
           <img src="/logo.svg" alt="" className="w-8 h-8" />
@@ -27,7 +28,7 @@ const Sidebar = () => {
         <div className="w-[90%] border-b border-(--color-secondary) mx-auto my-5 opacity-50 rounded-full" />
 
         {/* Nav */}
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 flex-1">
           {LIST_SIDEBAR.map((item, index) => {
             const active =
               pathname === item.path || isChildActive(item.children);
@@ -105,6 +106,11 @@ const Sidebar = () => {
               </Link>
             );
           })}
+        </div>
+
+        {/* Sign in */}
+        <div className="mt-auto">
+          <SidebarUser />
         </div>
       </div>
 

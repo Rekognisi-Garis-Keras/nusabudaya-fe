@@ -17,6 +17,7 @@ export const LIST_SIDEBAR = [
     icon: ChessKnight,
     path: "/arena",
     label: "Arena",
+    protected: true,
   },
   {
     icon: ScanSearch,
