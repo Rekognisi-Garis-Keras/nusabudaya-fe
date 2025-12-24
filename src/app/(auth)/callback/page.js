@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import GoldEmblem from "@/app/loading/page";
 
 export default function GoogleCallbackPage() {
    const router = useRouter();
@@ -18,5 +19,5 @@ export default function GoogleCallbackPage() {
       }
    }, [router]);
 
-   return <p>Login via Google, tunggu sebentar...</p>;
+   return <GoldEmblem />;
 }
