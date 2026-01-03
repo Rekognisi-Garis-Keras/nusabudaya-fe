@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { Camera, Upload, X } from "lucide-react";
+import { Camera, Info, Upload, X } from "lucide-react";
 import HeaderSection from "@/components/HeaderSection";
 import InfoCard from "@/components/Lens/InfoCard";
 import UploadPlaceholder from "@/components/Lens/UploadPlaceholder";
@@ -176,6 +176,21 @@ const NusaBudayaLens = () => {
           description="Upload atau ambil foto objek budaya Indonesia untuk mendapatkan informasi lengkap dan detail dari AI kami."
         />
 
+        <div className="p-4 w-full rounded-lg border border-(--color-secondary) bg-(--color-secondary)/30 -mt-2 mb-5">
+          <div className="flex items-center gap-2 mb-2">
+            <Info className="w-5 h-5 stroke-[#c7c7c7]" />
+            <span className="text-sm text-[#c7c7c7] font-semibold uppercase">
+              Disclaimer
+            </span>
+          </div>
+          <span className="text-sm text-[#c7c7c7]">
+            NusaLens AI masih dalam tahap pengembangan. Informasi yang
+            dihasilkan bersifat referensi dan mungkin belum sepenuhnya akurat.
+            Kami menyarankan pengguna untuk memverifikasi kembali informasi
+            dengan sumber terpercaya.
+          </span>
+        </div>
+
         {/* Main Content */}
         <div className="w-full">
           {!uploadedImage ? (
@@ -271,7 +286,7 @@ const NusaBudayaLens = () => {
               {isAnalyzing ? (
                 <LoadingResult />
               ) : aiResponse && aiResponse.isCultural === false ? (
-                  <NotCulture />
+                <NotCulture />
               ) : (
                 aiResponse && (
                   <AiResponse response={aiResponse} onReset={handleReset} />

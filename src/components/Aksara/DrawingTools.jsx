@@ -1,4 +1,12 @@
-import { Minus, Palette, PenTool, Plus, Spline, Trash } from "lucide-react";
+import {
+  Eraser,
+  Minus,
+  Palette,
+  PenTool,
+  Plus,
+  Spline,
+  Trash,
+} from "lucide-react";
 import React from "react";
 
 const DrawingTools = ({
@@ -73,7 +81,7 @@ const DrawingTools = ({
         onClick={clearCanvas}
         className="flex w-full items-center justify-center gap-2 py-3 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg hover:bg-red-500/20 transition-all active:scale-95 text-sm font-semibold"
       >
-        <Trash size={18} /> Bersihkan Canvas
+        <Eraser size={18} /> Bersihkan Canvas
       </button>
     </aside>
   );

@@ -1,9 +1,7 @@
-import Image from "next/image";
+import React from "react";
 
-export default function Home() {
-  return (
-    <div className="h-screen w-full bg-black/30">
-      <h1>ini main page</h1>
-    </div>
-  );
+function page() {
+  return <div>page</div>;
 }
+
+export default page;
