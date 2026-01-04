@@ -114,14 +114,14 @@ const AudioController = ({ onAudioRefsReady }) => {
     <button
       ref={buttonRef}
       onClick={toggleMusic}
-      className="fixed z-1000 right-3 top-3 md:right-5 md:top-3 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md  border border-(--color-secondary) p-2.5 md:p-3 rounded-full  hover:bg-(--color-secondary)  active:scale-95 transition-all duration-300 group shadow-lg"
+      className="fixed z-1000 right-3 top-4 md:right-5 md:top-3 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md  border border-(--color-secondary) p-2.5 md:p-3 rounded-full  hover:bg-(--color-secondary)  active:scale-95 transition-all duration-300 group shadow-lg"
       title={isMusicOn ? "Turn off music" : "Turn on music"}
       aria-label={isMusicOn ? "Turn off music" : "Turn on music"}
     >
       {isMusicOn ? (
-        <Volume2 className="w-5 h-5 md:w-6 md:h-6 stroke-white" />
+        <Volume2 className="w-6 h-6 stroke-white" />
       ) : (
-        <VolumeX className="w-5 h-5 md:w-6 md:h-6 stroke-white" />
+        <VolumeX className="w-6 h-6 stroke-white" />
       )}
     </button>
   );

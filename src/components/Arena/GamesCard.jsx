@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const MemoryPreview = () => (
@@ -98,6 +99,13 @@ const GamesCard = ({
   gameExp,
   gameDuration,
 }) => {
+  const gameRoutes = {
+    "Kartu Memori": "/memori",
+    "Tebak Gambar": "/tebak-gambar",
+    Kuis: "/quiz",
+  };
+
+  const gameLink = gameRoutes[gameName] || "#";
   return (
     <div className="group w-full h-full border border-[#5b5b5b] rounded-lg flex flex-col overflow-hidden">
       <div className="h-48 relative bg-[#0D1922] shrink-0">
@@ -126,9 +134,11 @@ const GamesCard = ({
           </div>
         </div>
 
-        <div className="w-full rounded-md mt-5 py-2  flex items-center justify-center bg-(--color-secondary) font-semibold tracking-wide">
-          MAIN
-        </div>
+        <Link href={gameLink}>
+          <button className="w-full rounded-md mt-5 py-2 cursor-pointer flex items-center justify-center bg-(--color-secondary) font-semibold tracking-wide">
+            MAIN
+          </button>
+        </Link>
       </div>
     </div>
   );

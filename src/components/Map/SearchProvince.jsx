@@ -33,7 +33,7 @@ const SearchProvince = ({ onProvinceSelect }) => {
   };
 
   return (
-    <div className="absolute top-3 left-3 z-1000 w-50">
+    <div className="absolute top-4 left-16.5 md:top-4 md:left-3 z-1000 w-50">
       <div className="relative">
         <input
           type="text"

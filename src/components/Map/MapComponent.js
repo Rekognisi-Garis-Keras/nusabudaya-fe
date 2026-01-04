@@ -250,7 +250,7 @@ const MapComponent = () => {
         onClick={() => setIsGuideOpen(!isGuideOpen)}
         className="absolute bottom-4 left-4 z-1000 bg-[color-mix(in_srgb,var(--color-primary)_90%,transparent)]  backdrop-blur-md border border-(--color-secondary) p-2.5 md:p-3 rounded-full hover:bg-(--color-secondary) active:scale-95 transition-all duration-300 group shadow-lg"
       >
-        <CircleQuestionMark className="w-5 h-5 md:w-6 md:h-6 stroke-white" />
+        <CircleQuestionMark className="w-6 h-6 stroke-white" />
       </button>
       {isGuideOpen && <Guide onClose={handleCloseGuide} />}
 
