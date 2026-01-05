@@ -39,13 +39,12 @@ const VisualPreview = () => (
   </div>
 );
 
-// 🧩 Visual buat game Pengetahuan
 const QuizPreview = () => {
   const options = [
-    { label: "A", delay: "delay-0" },
-    { label: "B", delay: "delay-75", correct: true }, // Si 'B' kita bikin spesial
-    { label: "C", delay: "delay-150" },
-    { label: "D", delay: "delay-300" },
+    { label: "A", delay: "delay-0", time: "0ms" },
+    { label: "B", delay: "delay-75", correct: true, time: "75ms" }, // 👇 Kita tambahin properti 'time' buat animation delay
+    { label: "C", delay: "delay-150", time: "150ms" },
+    { label: "D", delay: "delay-300", time: "300ms" },
   ];
 
   return (
@@ -54,13 +53,16 @@ const QuizPreview = () => {
         {options.map((opt) => (
           <div
             key={opt.label}
+            // 👇 MAGIC-NYA DISINI: Inline style buat animation-delay biar geraknya gantian!
+            style={{ animationDelay: opt.time }}
             className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold transition-all duration-300
               ${
                 opt.correct
                   ? "bg-(--color-secondary)/20 text-(--color-secondary)"
                   : "bg-white/10 text-white"
               }
-              animate-quiz-loop lg:animate-none ${opt.delay} 
+              ${opt.correct ? "animate-quiz-correct" : "animate-quiz-other"}
+              lg:animate-none ${opt.delay} 
               lg:group-hover:-translate-y-5 
               ${
                 opt.correct
@@ -76,8 +78,8 @@ const QuizPreview = () => {
 
       <span
         className="text-white/60 text-xs font-medium tracking-widest uppercase
-                      /* 💡 MAGIC DISINI: Ganti md: jadi lg: */
-                      animate-pulse lg:animate-none lg:opacity-0 lg:translate-y-2 
+                      animate-quiz-text lg:animate-none 
+                      lg:opacity-0 lg:translate-y-2 
                       lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500"
       >
         Jawaban Benar!

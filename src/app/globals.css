@@ -15,6 +15,10 @@
   --animate-quiz-loop: quiz-bounce 2s ease-in-out infinite;
   --animate-visual-loop: fade-blur 3s ease-in-out infinite;
 
+  --animate-quiz-correct: quiz-correct-loop 3s ease-in-out infinite;
+  --animate-quiz-other: quiz-other-loop 3s ease-in-out infinite;
+  --animate-quiz-text: quiz-text-loop 3s ease-in-out infinite;
+
   @keyframes float-left {
     0%,
     100% {
@@ -57,6 +61,48 @@
     50% {
       opacity: 0;
     }
+  }
+}
+
+@keyframes quiz-correct-loop {
+  0%,
+  100% {
+    transform: translateY(0);
+    background-color: rgba(200, 166, 104, 0.2); /* --color-secondary/20 */
+    color: #c8a668; /* --color-secondary */
+    box-shadow: none;
+  }
+  50% {
+    transform: translateY(-1.25rem); /* -translate-y-5 */
+    background-color: #c8a668;
+    color: black;
+    box-shadow: 0 0 15px rgba(200, 166, 104, 0.6);
+  }
+}
+
+@keyframes quiz-other-loop {
+  0%,
+  100% {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.1); /* bg-white/10 */
+    color: white;
+  }
+  50% {
+    transform: translateY(-1.25rem);
+    background-color: white;
+    color: black;
+  }
+}
+
+@keyframes quiz-text-loop {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

@@ -142,17 +142,20 @@ function AksaraPage() {
       <HeaderAksara handleTutorial={handleTutorial} slug={slug} />
 
       {isDisclaimerOpen && (
-        <div className="max-w-6xl w-full mb-5 rounded-lg p-3 bg-(--color-secondary)/30 border border-(--color-secondary) gap-2 flex items-center relative">
-          <Info className="stroke-[#c7c7c7] w-5 h-5" />
-          <span className="text-sm text-[#c7c7c7]">
+        <div className="max-w-6xl w-full mb-5 rounded-lg p-3 bg-(--color-secondary)/30 border border-(--color-secondary) gap-3 flex items-start justify-start relative pr-12 transition-all">
+          {/* 👇 PERBAIKAN DISINI: Tambah 'shrink-0' biar icon gak gepeng */}
+          <Info className="stroke-[#c7c7c7] w-5 h-5 mt-0.5 shrink-0" />
+
+          <span className="text-sm text-[#c7c7c7] leading-relaxed">
             Sistem pengenalan aksara menggunakan teknologi unistroke
             recognition. Tulis aksara dalam satu goresan berkelanjutan tanpa
             mengangkat pena untuk hasil optimal.
           </span>
 
+          {/* Tombol close tetap di posisi absolute */}
           <button
             onClick={() => setIsDisclaimerOpen(false)}
-            className="absolute top-1/2 -translate-y-1/2 right-3 p-1 rounded hover:bg-white/10"
+            className="absolute top-3 right-3 p-1 rounded hover:bg-white/10"
           >
             <X className="w-5 h-5 stroke-[#c7c7c7]" />
           </button>
