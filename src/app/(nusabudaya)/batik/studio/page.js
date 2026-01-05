@@ -184,7 +184,7 @@ const MockupBatik = () => {
                   </div>
                   <p className="font-medium text-white">Klik atau Drop Motif</p>
                   <p className="text-sm text-slate-500 mt-1">
-                    PNG, JPG up to 5MB
+                    Format: PNG, JPG, JPEG (Maks. 5MB)
                   </p>
                 </div>
               ) : (

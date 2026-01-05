@@ -44,13 +44,13 @@ const QuizSummary = ({
       {/* Header */}
       <div className="text-center mb-8 md:mb-12">
         <div className="mb-4">
-          <Trophy className="w-20 h-20 md:w-24 md:h-24 mx-auto text-[#c8a668] animate-bounce" />
+          <Trophy className="w-20 h-20 md:w-24 md:h-24 mx-auto text-[#c8a668]" />
         </div>
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-3">
-          Kuis Selesai! 🎉
+          Kuis Selesai
         </h1>
         <p className="text-lg md:text-xl text-[#c7c7c7]">
-          Berikut adalah ringkasan hasil kuis kamu
+          Berikut ringkasan pencapaian dan analisis hasil kuismu
         </p>
       </div>
 
@@ -78,7 +78,7 @@ const QuizSummary = ({
         {/* Correct Answers */}
         <div className="bg-[#1a2832] rounded-xl p-5 border border-[#5B5B5B] flex flex-col items-center">
           <CheckCircle className="w-8 h-8 text-green-400 mb-2" />
-          <span className="text-sm text-[#c7c7c7] mb-1">Benar</span>
+          <span className="text-sm text-[#c7c7c7] mb-1">Jawaban Benar</span>
           <span className="text-2xl md:text-3xl font-bold text-white">
             {correctAnswers}/{totalQuestions}
           </span>
@@ -87,7 +87,7 @@ const QuizSummary = ({
         {/* Accuracy */}
         <div className="bg-[#1a2832] rounded-xl p-5 border border-[#5B5B5B] flex flex-col items-center">
           <Trophy className="w-8 h-8 text-blue-400 mb-2" />
-          <span className="text-sm text-[#c7c7c7] mb-1">Akurasi</span>
+          <span className="text-sm text-[#c7c7c7] mb-1">Tingkat Akurasi</span>
           <span className="text-2xl md:text-3xl font-bold text-white">
             {accuracy}%
           </span>
@@ -96,7 +96,7 @@ const QuizSummary = ({
         {/* Total Time */}
         <div className="bg-[#1a2832] rounded-xl p-5 border border-[#5B5B5B] flex flex-col items-center">
           <Clock className="w-8 h-8 text-purple-400 mb-2" />
-          <span className="text-sm text-[#c7c7c7] mb-1">Waktu</span>
+          <span className="text-sm text-[#c7c7c7] mb-1">Total Waktu</span>
           <span className="text-2xl md:text-3xl font-bold text-white">
             {formatTime(totalTime)}
           </span>
@@ -155,10 +155,10 @@ const QuizSummary = ({
                 }`}
               >
                 {result.isCorrect
-                  ? "Benar ✓"
+                  ? "Benar"
                   : result.isTimeout
                   ? "Waktu Habis ⏱️"
-                  : "Salah ✗"}
+                  : "Salah"}
               </span>
             </div>
           ))}
@@ -176,7 +176,7 @@ const QuizSummary = ({
         </Link>
         <Link
           href="/leaderboard"
-          className="flex-1 bg-[#c8a668] text-[#0D1922] py-4 rounded-lg hover:bg-[#d4b876] transition font-semibold text-center flex items-center justify-center gap-2"
+          className="flex-1 bg-[#c8a668] text-white py-4 rounded-lg hover:bg-[#d4b876] transition font-semibold text-center flex items-center justify-center gap-2"
         >
           <Crown className="w-5 h-5" />
           Lihat Leaderboard

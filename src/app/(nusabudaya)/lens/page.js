@@ -301,7 +301,7 @@ const NusaBudayaLens = () => {
             <div className="flex items-center gap-2 mb-6">
               <div className="h-7 border-2 rounded-full border-[#c8a668]"></div>
               <h2 className="text-lg md:text-xl text-white font-semibold">
-                Contoh Objek Budaya yang Dapat Dianalisis
+                Kategori Objek Budaya yang Didukung
               </h2>
             </div>
 

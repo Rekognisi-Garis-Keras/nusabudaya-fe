@@ -19,7 +19,7 @@ const page = () => {
         <div className="flex items-center gap-2 my-5">
           <div className="h-7 border-2 rounded-full border-(--color-secondary)"></div>
           <span className="text-lg text-white font-medium">
-            Ringkasan Statistik
+            Statistik Pencapaian
           </span>
         </div>
         <div className="w-full gap-4 grid md:grid-cols-4 grid-cols-1">
@@ -61,7 +61,7 @@ const page = () => {
             <div className="flex items-center gap-1">
               <Gamepad2 className="stroke-[#c7c7c7] w-5 h-5" />
               <span className="text-[#c7c7c7] font-medium text-md">
-                Game Sudah Dimainkan
+                Permainan Diselesaikan
               </span>
             </div>
             <span className="text-2xl font-semibold text-(--color-secondary) ml-6">
@@ -77,7 +77,7 @@ const page = () => {
         <div className="flex items-center gap-2 my-5">
           <div className="h-7 border-2 rounded-full border-(--color-secondary)"></div>
           <span className="text-lg text-white font-medium">
-            Permainan yang Tersedia
+            Koleksi Permainan
           </span>
         </div>
 
@@ -86,7 +86,7 @@ const page = () => {
             gameRole={"ingatan"}
             gameName={"Kartu Memori"}
             gameDescription={
-              "Memasangkan pasangan kartu dengan gambar barang tradisional, simbol tradisional, atau budaya elemen lainnya. Belajar sambil latih ingatan kamu."
+              "Pasangkan pasangan kartu dengan gambar barang tradisional, simbol tradisional, atau budaya elemen lainnya. Belajar sambil latih ingatan kamu."
             }
             gameExp={75}
             gameDuration={1}
@@ -95,7 +95,7 @@ const page = () => {
             gameRole={"visual"}
             gameName={"Tebak Gambar"}
             gameDescription={
-              "Menebak gambar mengenai adat dan budaya tradisional dari provinsi yang kamu pilih. Belajar lewat visual kamu!"
+              "Tebak gambar mengenai adat dan budaya tradisional dari provinsi yang kamu pilih. Belajar lewat visual kamu!"
             }
             gameExp={75}
             gameDuration={1}

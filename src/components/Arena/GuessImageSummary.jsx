@@ -60,7 +60,7 @@ const GuessImageSummary = ({
       {/* Header */}
       <div className="text-center mb-8 md:mb-12">
         <div className="mb-4">
-          <Trophy className="w-20 h-20 md:w-24 md:h-24 mx-auto text-[#c8a668] animate-bounce" />
+          <Trophy className="w-20 h-20 md:w-24 md:h-24 mx-auto text-[#c8a668]" />
         </div>
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-3">
           Tebak Gambar Selesai! 🎉
@@ -187,10 +187,10 @@ const GuessImageSummary = ({
                   }`}
                 >
                   {result.isCorrect
-                    ? "Benar ✓"
+                    ? "Benar"
                     : result.isTimeout
                     ? "Waktu Habis ⏱️"
-                    : "Salah ✗"}
+                    : "Salah"}
                 </span>
                 {result.isCorrect && (
                   <span className="text-xs text-[#c8a668] font-bold">
@@ -262,7 +262,7 @@ const GuessImageSummary = ({
         </Link>
         <Link
           href="/leaderboard"
-          className="flex-1 bg-[#c8a668] text-[#0D1922] py-4 rounded-lg hover:bg-[#d4b876] transition font-semibold text-center flex items-center justify-center gap-2"
+          className="flex-1 bg-[#c8a668] text-white py-4 rounded-lg hover:bg-[#d4b876] transition font-semibold text-center flex items-center justify-center gap-2"
         >
           <Crown className="w-5 h-5" />
           Lihat Leaderboard

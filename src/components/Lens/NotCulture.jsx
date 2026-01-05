@@ -7,7 +7,7 @@ const NotCulture = () => {
         <SearchX className="stroke-red-500" />
       </div>
       <h3 className="text-xl font-bold text-red-400 mb-2">
-        Objek Tidak Dikenali
+        Objek Tidak Teridentifikasi
       </h3>
       <p className="text-white md:text-base text-sm max-w-lg">
         Sepertinya gambar ini bukan termasuk objek budaya Indonesia. Coba upload

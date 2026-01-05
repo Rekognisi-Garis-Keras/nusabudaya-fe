@@ -10,10 +10,10 @@ const UploadPlaceholder = () => {
       </div>
 
       <h2 className="text-xl md:text-2xl text-white font-semibold mb-3 text-center">
-        Mulai Analisis Budaya
+        Identifikasi Objek Budaya
       </h2>
       <p className="text-[#c7c7c7] text-sm md:text-base mb-8 text-center max-w-md">
-        Pilih cara untuk mengunggah foto objek budaya yang ingin Anda ketahui
+        Upload atau ambil foto objek budaya Indonesia untuk analisis AI
       </p>
     </>
   );

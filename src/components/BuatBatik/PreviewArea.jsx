@@ -51,12 +51,12 @@ const PreviewArea = ({
           {isLoading ? (
             <>
               <div className="w-5 h-5 border-2 border-[#0D1922] border-t-transparent rounded-full animate-spin" />
-              <span>Proses...</span>
+              <span>Memproses...</span>
             </>
           ) : (
             <>
               <Send className="w-5 h-5" />
-              <span>Buat</span>
+              <span>Generate Motif</span>
             </>
           )}
         </button>

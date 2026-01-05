@@ -145,7 +145,9 @@ function AksaraPage() {
         <div className="max-w-6xl w-full mb-5 rounded-lg p-3 bg-(--color-secondary)/30 border border-(--color-secondary) gap-2 flex items-center relative">
           <Info className="stroke-[#c7c7c7] w-5 h-5" />
           <span className="text-sm text-[#c7c7c7]">
-            Disclaimer unistroke di sini
+            Sistem pengenalan aksara menggunakan teknologi unistroke
+            recognition. Tulis aksara dalam satu goresan berkelanjutan tanpa
+            mengangkat pena untuk hasil optimal.
           </span>
 
           <button

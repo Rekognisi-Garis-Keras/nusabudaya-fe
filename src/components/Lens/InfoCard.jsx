@@ -11,10 +11,16 @@ const InfoCard = () => {
             Tips untuk hasil terbaik:
           </h3>
           <ul className="text-[#c7c7c7] text-xs md:text-sm space-y-1">
-            <li>• Pastikan pencahayaan cukup dan objek terlihat jelas</li>
-            <li>• Fokuskan kamera pada objek budaya utama</li>
-            <li>• Hindari foto yang blur atau terlalu gelap</li>
-            <li>• Objek budaya harus terlihat utuh dalam frame</li>
+            <li>
+              • Gunakan pencahayaan natural atau cahaya terang untuk hasil
+              optimal
+            </li>
+            <li>• Posisikan objek budaya sebagai fokus utama dalam frame</li>
+            <li>• Hindari foto buram, underexposed, atau terpotong</li>
+            <li>
+              • Ambil gambar dari jarak yang memperlihatkan detail objek dengan
+              jelas
+            </li>
           </ul>
         </div>
       </div>

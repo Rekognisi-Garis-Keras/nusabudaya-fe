@@ -100,9 +100,9 @@ const GamesCard = ({
   gameDuration,
 }) => {
   const gameRoutes = {
-    "Kartu Memori": "/memori",
-    "Tebak Gambar": "/tebak-gambar",
-    Kuis: "/quiz",
+    "Kartu Memori": "/arena/memori",
+    "Tebak Gambar": "/arena/tebak-gambar",
+    Kuis: "/arena/kuis",
   };
 
   const gameLink = gameRoutes[gameName] || "#";
@@ -136,7 +136,7 @@ const GamesCard = ({
 
         <Link href={gameLink}>
           <button className="w-full rounded-md mt-5 py-2 cursor-pointer flex items-center justify-center bg-(--color-secondary) font-semibold tracking-wide">
-            MAIN
+            MULAI MAIN
           </button>
         </Link>
       </div>
