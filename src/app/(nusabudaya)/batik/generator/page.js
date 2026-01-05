@@ -50,7 +50,7 @@ const BuatBatikPage = () => {
     <main className="min-h-screen bg-[#05121b] pb-20 md:pb-0">
       <div className="w-full h-full p-4 md:p-8">
         <HeaderSection
-          breadcrumb="Buat Batik"
+          breadcrumb="NusaBatik"
           sectionTitle="Kreasi Batik AI"
           description="Unggah sketsa atau referensi gambarmu, dan berikan instruksi untuk membuat motif batik yang unik."
         />

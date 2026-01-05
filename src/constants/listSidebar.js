@@ -30,13 +30,13 @@ export const LIST_SIDEBAR = [
     children: [
       {
         icon: PaintBucket,
-        path: "/batik/buat",
-        label: "Buat Batik",
+        path: "/batik/generator",
+        label: "Batik Generator",
       },
       {
         icon: PaintBucket,
-        path: "/batik/mockup",
-        label: "Mockup Batik",
+        path: "/batik/studio",
+        label: "Studio Batik",
       },
     ],
   },

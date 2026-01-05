@@ -137,7 +137,7 @@ const MockupBatik = () => {
     <div className="min-h-screen bg-[#05121b] text-slate-200 pb-20 md:pb-0">
       <div className="max-w-[1600px] mx-auto p-4 md:p-8">
         <HeaderSection
-          breadcrumb="Mockup Center"
+          breadcrumb="NusaBatik"
           sectionTitle="NusaDesign 3D"
           description="Transformasi motif tradisional ke produk fashion masa kini."
         />
