@@ -42,7 +42,7 @@ const DetailProvince = ({ province, onClose }) => {
 
   return (
     <>
-      <div className="panel md:w-[400px] w-full md:h-screen h-[calc(100vh-72px)] fixed z-9999 top-0 md:left-64 bg-[#0D1922] backdrop-blur-md shadow-2xl border-r border-gray-200 overflow-y-auto py-8 px-5 text-slate-800">
+      <div className="panel md:w-[400px] w-full h-screen fixed z-9999 top-0 lg:left-64 bg-[#0D1922] backdrop-blur-md shadow-2xl border-r border-gray-200 overflow-y-auto py-8 px-5 text-slate-800">
         {/* ✨ TOMBOL CLOSE (X) */}
         <button
           onClick={handleCloseClick}
@@ -73,7 +73,9 @@ const DetailProvince = ({ province, onClose }) => {
           </div>
           <div className="flex justify-between text-white">
             <span className="font-medium">Berdiri sejak</span>
-            <span className="text-amber-100">{formatDate(province.anniversary_date)}</span>
+            <span className="text-amber-100">
+              {formatDate(province.anniversary_date)}
+            </span>
           </div>
         </div>
 
@@ -91,7 +93,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.traditionalHouses}
           />
-          
+
           {/* ==== Tari Tradisional ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -100,7 +102,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.traditionalDances}
           />
-          
+
           {/* ==== Senjata Tradisional ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -109,7 +111,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.traditionalWeapons}
           />
-          
+
           {/* ==== Kuliner ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -118,7 +120,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.culinaries}
           />
-          
+
           {/* ==== Musik Tradisional ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -127,7 +129,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.musicalInstruments}
           />
-          
+
           {/* ==== Lagu Daerah ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -136,7 +138,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.regionalSongs}
           />
-          
+
           {/* ==== Tradisi ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -145,7 +147,7 @@ const DetailProvince = ({ province, onClose }) => {
             setTitle={setTitle}
             data={province.traditions}
           />
-          
+
           {/* ==== Spot Wisata ==== */}
           <Cultures
             openInfo={setIsInfoOpen}
@@ -157,11 +159,11 @@ const DetailProvince = ({ province, onClose }) => {
         </div>
       </div>
       {isInfoOpen && (
-        <DetailInfoProvince 
+        <DetailInfoProvince
           detail={detail}
           context={title}
-          openInfo={setIsInfoOpen} 
-          province={province} 
+          openInfo={setIsInfoOpen}
+          province={province}
         />
       )}
     </>

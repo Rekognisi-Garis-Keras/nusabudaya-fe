@@ -60,7 +60,7 @@ const QuizPreview = () => {
                   ? "bg-(--color-secondary)/20 text-(--color-secondary)"
                   : "bg-white/10 text-white"
               }
-              animate-quiz-loop lg:animate-none ${opt.delay}
+              animate-quiz-loop lg:animate-none ${opt.delay} 
               lg:group-hover:-translate-y-5 
               ${
                 opt.correct
@@ -74,12 +74,11 @@ const QuizPreview = () => {
         ))}
       </div>
 
-      {/* 📝 Teks Reveal */}
       <span
         className="text-white/60 text-xs font-medium tracking-widest uppercase
-                      /* 🔄 Pulse di HP, Reveal di Laptop */
-                      animate-pulse md:animate-none md:opacity-0 md:translate-y-2 
-                      md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500"
+                      /* 💡 MAGIC DISINI: Ganti md: jadi lg: */
+                      animate-pulse lg:animate-none lg:opacity-0 lg:translate-y-2 
+                      lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500"
       >
         Jawaban Benar!
       </span>

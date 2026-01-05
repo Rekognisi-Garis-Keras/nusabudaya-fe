@@ -22,10 +22,9 @@ const page = () => {
             Statistik Pencapaian
           </span>
         </div>
-        <div className="w-full gap-4 grid md:grid-cols-4 grid-cols-1">
-          <div className="w-70 border border-[#5B5B5B] bg-[#0D1922] rounded-lg p-3 hover:border-(--color-secondary) hover:bg-[#101b27] gap-1">
+        <div className="w-full gap-4 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+          <div className="w-full border border-[#5B5B5B] bg-[#0D1922] rounded-lg p-3 hover:border-(--color-secondary) hover:bg-[#101b27] gap-1">
             <div className="flex items-center gap-1">
-              {/* <Zap strokeWidth={1.5} className="stroke-[#c7c7c7] w-5 h-5" /> */}
               <svg
                 width="24"
                 height="24"
@@ -57,7 +56,7 @@ const page = () => {
               1.600
             </span>
           </div>
-          <div className="w-70 border border-[#5B5B5B] bg-[#0D1922] rounded-lg p-3 flex flex-col gap-1 hover:border-(--color-secondary) hover:bg-[#101b27]">
+          <div className="w-full border border-[#5B5B5B] bg-[#0D1922] rounded-lg p-3 flex flex-col gap-1 hover:border-(--color-secondary) hover:bg-[#101b27]">
             <div className="flex items-center gap-1">
               <Gamepad2 className="stroke-[#c7c7c7] w-5 h-5" />
               <span className="text-[#c7c7c7] font-medium text-md">

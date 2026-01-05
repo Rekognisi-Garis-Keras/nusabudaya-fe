@@ -65,13 +65,15 @@ const Sidebar = () => {
         flex flex-col
         transition-transform duration-300 ease-in-out
         w-64
-        md:translate-x-0
+        lg:translate-x-0  
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
       `}
       >
         <button
           onClick={toggleMobileMenu}
-          className={`md:hidden absolute top-4 z-10001 bg-[#0D1922] border border-(--color-secondary) p-2.5 rounded-lg shadow-lg -right-15`}
+          /* 💡 UBAH DISINI: md:hidden jadi lg:hidden */
+          /* Biar tombol X nya tetep muncul di tablet pas menu kebuka */
+          className={`lg:hidden absolute top-4 z-10001 bg-[#0D1922] border border-(--color-secondary) p-2.5 rounded-lg shadow-lg -right-15`}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
