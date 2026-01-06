@@ -6,29 +6,14 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, LogOut } from "lucide-react";
 import ProfileModal from "./Profile/ProfileModal";
 import SidebarProfile from "./SidebarProfile";
+import { useUser } from "@/context/userContext";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { user, loading, logout } = useUser();
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-
-  const user = {
-    name: "Faza Mumtaz",
-    email: "fazamumtaz091@gmail.com",
-    xp: 1600,
-    avatar:
-      "https://i.pinimg.com/1200x/80/49/d9/8049d9da40247a22b73297710f275a79.jpg",
-    achievements: [
-      "#2 Sumatra Explorer",
-      "#3 Jawa Hunter",
-      "#5 Kalimantan Ranger",
-      "#9 Sulawesi Voyager",
-      "#14 Papua Pathfinder",
-      "#39 Maluku Slayer",
-      "#25 Bali & Nusa Tenggara Wanderer",
-    ],
-  };
 
   const isChildActive = (children) =>
     children?.some((child) => pathname.startsWith(child.path));
@@ -39,11 +24,6 @@ const Sidebar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-  };
-
-  const handleLogout = () => {
-    // Add logout logic here
-    console.log("Logging out...");
   };
 
   return (
@@ -181,7 +161,7 @@ const Sidebar = () => {
         {/* Logout Button */}
         <div className="px-5 py-4">
           <button
-            onClick={handleLogout}
+            onClick={logout}
             className="flex items-center gap-2 w-full cursor-pointer text-red-400 border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 p-2 rounded-lg transition-all duration-300 px-3 py-2.5 group"
           >
             <LogOut className="w-5 h-5  " />
