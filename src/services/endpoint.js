@@ -6,5 +6,10 @@ export const endpoints = {
 
   gameResults: {
     getAll: '/game-results',
+    create: '/game-results',
+  },
+
+  quizzes: {
+    getAll: '/quizzes',
   },
 }

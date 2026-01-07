@@ -45,6 +45,7 @@ export default function ArenaDetail() {
           }
           gameExp={75}
           gameDuration={1}
+          province={province}
         />
         <GamesCard
           gameRole={"visual"}
@@ -54,6 +55,7 @@ export default function ArenaDetail() {
           }
           gameExp={75}
           gameDuration={1}
+          province={province}
         />
         <GamesCard
           gameRole={"pengetahuan"}
@@ -63,6 +65,7 @@ export default function ArenaDetail() {
           }
           gameExp={75}
           gameDuration={1}
+          province={province}
         />
       </div>
     </div>

@@ -1,12 +1,18 @@
-// src/app/(games)/arena/quiz/page.js
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import QuizQuestion from "@/components/Arena/QuizQuestion";
 import QuizSummary from "@/components/Arena/QuizSummary";
 import { getQuizByProvince, QUIZ_CONFIG } from "@/constants/quizQuestions";
+import { useParams } from "next/navigation";
+import { provinceService } from "@/services/modules/province.service";
+import { quizService } from "@/services/modules/quiz.service";
+import GoldEmblem from "@/app/loading/page";
+import { gameResultService } from "@/services/modules/game-result.service";
+import { GameType } from "@/constants/gameType";
 
 const Quiz = () => {
+  const { slug } = useParams();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -15,10 +21,54 @@ const Quiz = () => {
   const [quizEnded, setQuizEnded] = useState(false);
   const [results, setResults] = useState([]);
   const [totalTime, setTotalTime] = useState(0);
+  const [province, setProvince] = useState(null);
+  const [quizzes, setQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 1. fetch province
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchProvince = async () => {
+      try {
+        const data = await provinceService.getBySlug(slug);
+        setProvince(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProvince();
+  }, [slug]);
+
+  // 2. fetch quizzes
+  useEffect(() => {
+    if (!province?.id) return;
+
+    const fetchQuizzes = async () => {
+      try {
+        const data = await quizService.getByProvince(province.id);
+        // Transform data to match component format if needed
+        const transformedQuizzes = data.map(quiz => ({
+          id: quiz.id,
+          question: quiz.question,
+          choices: quiz.choices,
+          answer: quiz.answer,
+          explanation: quiz.explanation
+        }));
+        setQuizzes(transformedQuizzes);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuizzes();
+  }, [province?.id]);
 
   // Get questions - for now using Jawa Barat
-  const questions = getQuizByProvince("Jawa Barat");
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = quizzes[currentQuestionIndex];
 
   // Timer countdown
   useEffect(() => {
@@ -36,69 +86,135 @@ const Quiz = () => {
     }
   }, [timeLeft, isAnswered, quizEnded, totalTime]);
 
-  const handleAnswerSelect = (answerIndex) => {
-    if (isAnswered) return;
-
-    setSelectedAnswer(answerIndex);
+  const handleAnswerSelect = (answer) => {
+    if (isAnswered || !currentQuestion) return;
+  
+    setSelectedAnswer(answer);
     setIsAnswered(true);
-
-    const isCorrect = answerIndex === currentQuestion.correctAnswer;
-
-    // Save result
-    const newResult = {
-      questionId: currentQuestion.id,
-      isCorrect,
-      isTimeout: false,
-      selectedAnswer: answerIndex,
-      correctAnswer: currentQuestion.correctAnswer,
-    };
-    setResults([...results, newResult]);
-
+  
+    const isCorrect = answer === currentQuestion.answer;
+    const isLastQuestion = currentQuestionIndex === quizzes.length - 1;
+  
+    // Update results
+    setResults(prev => {
+      const newResults = [
+        ...prev,
+        {
+          quizId: currentQuestion.id,
+          isCorrect,
+          isTimeout: false,
+          selectedAnswer: answer,
+          correctAnswer: currentQuestion.answer,
+        }
+      ];
+      
+      // If this is the last question, submit after showing explanation
+      if (isLastQuestion) {
+        setTimeout(() => {
+          // Calculate final XP from all results including the last one
+          const finalXp = newResults.filter(r => r.isCorrect).length * QUIZ_CONFIG.XP_PER_CORRECT;
+          submitQuizResults(newResults, finalXp);
+        }, 2000);
+      }
+      
+      return newResults;
+    });
+  
+    // Update XP for display
     if (isCorrect) {
-      setXpEarned(xpEarned + QUIZ_CONFIG.XP_PER_CORRECT);
+      setXpEarned(prev => prev + QUIZ_CONFIG.XP_PER_CORRECT);
     }
-
-    // Move to next question after 2 seconds
-    setTimeout(() => {
-      moveToNextQuestion();
-    }, 2000);
+  
+    // Only move to next question if not the last question
+    if (!isLastQuestion) {
+      setTimeout(moveToNextQuestion, 2000);
+    }
   };
+  
 
   const handleTimeout = () => {
+    if (!currentQuestion) return;
+    
     setIsAnswered(true);
+
+    const isLastQuestion = currentQuestionIndex === quizzes.length - 1;
 
     // Save timeout result
     const newResult = {
-      questionId: currentQuestion.id,
+      quizId: currentQuestion.id,
       isCorrect: false,
       isTimeout: true,
       selectedAnswer: null,
-      correctAnswer: currentQuestion.correctAnswer,
+      correctAnswer: currentQuestion.answer,
     };
-    setResults([...results, newResult]);
+    
+    setResults(prev => {
+      const newResults = [...prev, newResult];
+      
+      // If this is the last question, submit after showing timeout
+      if (isLastQuestion) {
+        setTimeout(() => {
+          // Calculate final XP from all results (last question is wrong, so no XP added)
+          const finalXp = newResults.filter(r => r.isCorrect).length * QUIZ_CONFIG.XP_PER_CORRECT;
+          submitQuizResults(newResults, finalXp);
+        }, 1000);
+      }
+      
+      return newResults;
+    });
 
-    // Move to next question after 1 second
-    setTimeout(() => {
-      moveToNextQuestion();
-    }, 1000);
+    // Move to next question after 1 second if not the last question
+    if (!isLastQuestion) {
+      setTimeout(() => {
+        moveToNextQuestion();
+      }, 1000);
+    }
   };
 
-  const moveToNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
+  const submitQuizResults = async (finalResults, finalXp) => {
+    const provinceId = province.id;
+    const type = GameType.QUIZ;
+    const finalCorrectAnswers = finalResults.filter((r) => r.isCorrect).length;
+    const isCompleted = Math.round((finalCorrectAnswers / quizzes.length) * 100) === 100;
+    
+    // Update XP state to match final calculation
+    setXpEarned(finalXp);
+    
+    const resultData = {
+      provinceId,
+      type,
+      xp: finalXp,
+      time: totalTime,
+      is_complete: isCompleted
+    };
+    
+    try {
+      await gameResultService.create(resultData);
+    } catch (error) {
+      console.error("Error submitting quiz result:", error);
+    }
+    
+    setQuizEnded(true);
+  };
+
+  const moveToNextQuestion = async () => {
+    if (currentQuestionIndex < quizzes.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
       setIsAnswered(false);
       setTimeLeft(QUIZ_CONFIG.TIME_PER_QUESTION);
-    } else {
-      // Quiz ended
-      setQuizEnded(true);
     }
   };
 
   const correctAnswers = results.filter((r) => r.isCorrect).length;
 
+  if (loading) return <GoldEmblem />;
+
   // Summary Page
   if (quizEnded) {
+    // Calculate final values for summary
+    const finalCorrectAnswers = results.filter((r) => r.isCorrect).length;
+    
     return (
       <main className="min-h-screen w-full bg-[#0D1922] flex flex-col items-center overflow-y-auto">
         {/* Navigation bar */}
@@ -109,7 +225,7 @@ const Quiz = () => {
                 Kuis Budaya
               </span>
               <span className="text-xl md:text-2xl text-white font-medium">
-                Jawa Barat
+                {province?.name || "Kuis Budaya"}
               </span>
             </div>
             <Link
@@ -122,8 +238,8 @@ const Quiz = () => {
         </nav>
 
         <QuizSummary
-          correctAnswers={correctAnswers}
-          totalQuestions={questions.length}
+          correctAnswers={finalCorrectAnswers}
+          totalQuestions={quizzes.length}
           xpEarned={xpEarned}
           totalTime={totalTime}
           results={results}
@@ -167,19 +283,21 @@ const Quiz = () => {
 
       {/* Main content */}
       <div className="w-full flex-1 p-4 md:p-8 mt-4 md:mt-8">
-        <QuizQuestion
-          question={currentQuestion}
-          currentQuestionIndex={currentQuestionIndex}
-          totalQuestions={questions.length}
-          selectedAnswer={selectedAnswer}
-          onAnswerSelect={handleAnswerSelect}
-          timeLeft={timeLeft}
-          isAnswered={isAnswered}
-        />
+        {currentQuestion && (
+          <QuizQuestion
+            question={currentQuestion}
+            currentQuestionIndex={currentQuestionIndex}
+            totalQuestions={quizzes.length}
+            selectedAnswer={selectedAnswer}
+            onAnswerSelect={handleAnswerSelect}
+            timeLeft={timeLeft}
+            isAnswered={isAnswered}
+          />
+        )}
 
         {/* Progress indicator */}
         <div className="flex justify-center gap-2 mt-8">
-          {questions.map((_, index) => (
+          {quizzes.map((_, index) => (
             <div
               key={index}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
