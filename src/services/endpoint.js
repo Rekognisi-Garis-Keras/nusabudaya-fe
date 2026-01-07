@@ -12,4 +12,8 @@ export const endpoints = {
   quizzes: {
     getAll: '/quizzes',
   },
+
+  achievements: {
+    getAll: (provinceId) => `/achievements/all?province_id=${provinceId}`,
+  },
 }
