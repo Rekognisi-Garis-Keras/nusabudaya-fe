@@ -75,7 +75,12 @@ const Sidebar = () => {
           </div>
 
           {/* Profile Section */}
-          <SidebarProfile onProfileModal={setIsProfileModalOpen} user={user} />
+          {user && (
+            <SidebarProfile 
+                onProfileModal={setIsProfileModalOpen} 
+                user={user} 
+            />
+          )}
 
           {/* Navigation */}
           <div className="flex flex-col space-y-2 mt-4">
