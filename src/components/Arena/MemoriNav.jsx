@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const MemoriNav = ({ xpEarned }) => {
+const MemoriNav = ({ xpEarned, province }) => {
   return (
     <nav className="w-full h-20 bg-[#1a2832] px-4 md:px-10 flex items-center">
       <div className="w-full md:w-[80%] mx-auto flex flex-row items-center justify-between gap-2 md:gap-0">
@@ -10,7 +10,7 @@ const MemoriNav = ({ xpEarned }) => {
             Kuis Budaya
           </span>
           <span className="text-xl md:text-2xl text-white font-medium">
-            Jawa Barat
+            {province.name}
           </span>
         </div>
         <div className="flex items-center gap-4">

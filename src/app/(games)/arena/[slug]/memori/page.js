@@ -201,7 +201,7 @@ const Memori = () => {
   return (
     <main className="min-h-screen w-full bg-[#0D1922] flex flex-col items-center overflow-y-auto">
       {/* navigation bar */}
-      <MemoriNav xpEarned={xpEarned} />
+      <MemoriNav xpEarned={xpEarned} province={province} />
 
       {/* main layout */}
       <div className="w-full max-w-[900px] min-h-full p-3 md:p-5 mx-auto">
