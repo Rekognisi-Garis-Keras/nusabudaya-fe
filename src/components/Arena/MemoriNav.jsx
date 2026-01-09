@@ -10,7 +10,7 @@ const MemoriNav = ({ xpEarned, province }) => {
             Kuis Budaya
           </span>
           <span className="text-xl md:text-2xl text-white font-medium">
-            {province.name}
+            {province?.name}
           </span>
         </div>
         <div className="flex items-center gap-4">

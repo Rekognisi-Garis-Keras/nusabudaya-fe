@@ -1,8 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-// import { useGameResultStore } from "@/stores/gameResultStore";
-// import { useEffect } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,12 +14,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // const fetchGameResult = useGameResultStore((s) => s.fetch);
-
-  // useEffect(() => {
-  //   fetchGameResult();
-  // }, []);
-
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>

@@ -1,7 +1,16 @@
+"use client"
+
 import Sidebar from "@/components/Sidebar";
-import React from "react";
+import { useGameResultStore } from "@/stores/gameResultStore";
+import React, { useEffect } from "react";
 
 const MainLayout = ({ children }) => {
+  const fetchGameResult = useGameResultStore((s) => s.fetch);
+
+  useEffect(() => {
+    fetchGameResult();
+  }, []);
+
   return (
     <>
       <div>

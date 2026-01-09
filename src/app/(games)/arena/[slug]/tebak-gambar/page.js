@@ -1,6 +1,6 @@
 // src/app/(games)/arena/tebak-gambar/page.js
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import GuessImageQuestion from "@/components/Arena/GuessImageQuestion";
 import GuessImageSummary from "@/components/Arena/GuessImageSummary";
@@ -27,7 +27,7 @@ const TebakGambar = () => {
 
   const { slug } = useParams();
   const [province, setProvince] = useState(null);
-  const [resultSubmitted, setResultSubmitted] = React.useState(false);
+  const [resultSubmitted, setResultSubmitted] = useState(false);
 
   // Fetch Province
   useEffect(() => {
@@ -209,7 +209,7 @@ const TebakGambar = () => {
               Kuis Budaya
             </span>
             <span className="text-xl md:text-2xl text-white font-medium">
-              {province.name}
+              {province?.name}
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -225,7 +225,7 @@ const TebakGambar = () => {
               href="/arena"
               className="text-red-500 py-1.5 px-3 md:px-4 rounded-lg border border-red-500 bg-red-500/30 hover:bg-red-500/50 transition text-sm md:text-base"
             >
-              Quit
+              Keluar
             </Link>
           </div>
         </div>
