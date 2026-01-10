@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const { totalXp } = useGameResultStore();
+  const { totalXp, fetch: fetchGameResult } = useGameResultStore();
 
   const isChildActive = (children) =>
     children?.some((child) => pathname.startsWith(child.path));
@@ -27,6 +27,12 @@ const Sidebar = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (user) { // Opsional: hanya fetch jika user sudah login
+      fetchGameResult();
+    }
+  }, [user]);
 
   if (loading) return <SidebarSkeleton />;
 
