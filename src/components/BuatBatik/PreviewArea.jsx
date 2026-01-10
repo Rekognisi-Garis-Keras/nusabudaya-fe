@@ -56,7 +56,7 @@ const PreviewArea = ({
           ) : (
             <>
               <Send className="w-5 h-5" />
-              <span>Generate Motif</span>
+              <span>Generate Batik</span>
             </>
           )}
         </button>

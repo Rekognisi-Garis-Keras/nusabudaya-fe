@@ -36,7 +36,7 @@ const UploadArea = ({ inputRef }) => {
           className="bg-[#c8a668] hover:bg-[#d4b876] disabled:bg-[#c8a668]/50 disabled:cursor-not-allowed text-[#0D1922] font-bold py-3 px-8 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-95 min-w-[140px]"
         >
           <Send className="w-5 h-5" />
-          <span>Generate Motif</span>
+          <span>Generate Batik</span>
         </button>
       </div>
     </>
