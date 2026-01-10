@@ -30,7 +30,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (user) {
-      // Opsional: hanya fetch jika user sudah login
       fetchGameResult();
     }
   }, [user]);

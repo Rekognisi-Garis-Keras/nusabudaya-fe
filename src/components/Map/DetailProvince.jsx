@@ -95,13 +95,13 @@ const DetailProvince = ({ province, onClose }) => {
           />
 
           {/* ==== Tari Tradisional ==== */}
-          <Cultures
+          {/* <Cultures
             openInfo={setIsInfoOpen}
             setDetail={setDetail}
             title="Tari Tradisional"
             setTitle={setTitle}
             data={province.traditionalDances}
-          />
+          /> */}
 
           {/* ==== Senjata Tradisional ==== */}
           <Cultures

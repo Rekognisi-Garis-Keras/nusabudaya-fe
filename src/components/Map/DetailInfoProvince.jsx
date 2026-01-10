@@ -7,11 +7,12 @@ const DetailInfoProvince = ({ detail, province, openInfo }) => {
   const title = detail.name || detail.title;
 
   const cultureSections = [
-    { label: "Tradisi", list: province.traditions }, //bikin dia jadi info
     { label: "Rumah Tradisional", list: province.traditionalHouses },
     { label: "Senjata Tradisional", list: province.traditionalWeapons },
+    { label: "Tradisi", list: province.traditions }, //bikin dia jadi info
     { label: "Kuliner Khas", list: province.culinaries },
     { label: "Destinasi Wisata", list: province.tourismSpots },
+    { label: "Lagu Daerah", list: province.regionalSongs }, // 👈 Tambahin ini
     { label: "Alat Musik Daerah", list: province.musicalInstruments },
     { label: "Tarian Daerah", list: province.traditionalDances }, //bikin dia jadi iframe
   ];
