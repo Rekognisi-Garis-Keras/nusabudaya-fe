@@ -42,7 +42,6 @@ const IslandTabs = ({ onActiveTab, activeTab }) => {
               <img
                 src={province.icon_url}
                 alt={province.name}
-                fill
                 className={`object-contain ${
                   province.slug === "global" ? "p-0" : "p-1"
                 }`}
