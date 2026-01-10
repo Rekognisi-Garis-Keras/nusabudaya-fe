@@ -11,7 +11,6 @@ import { PROVINCE_MARKERS } from "@/constants/MarkerPositions";
 import AnimatedText from "../AnimatedText";
 import SearchProvince from "./SearchProvince";
 import DetailProvince from "./DetailProvince";
-import { getProvinceByName } from "@/constants/listDetail";
 import AudioController from "./AudioController";
 import Guide from "./Guide";
 import { CircleQuestionMark } from "lucide-react";
@@ -42,14 +41,6 @@ const MapComponent = () => {
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // const defaultIcon = L.icon({
-  //   iconUrl: "/sumatera.webp",
-  //   iconSize: [43, 43],
-  //   iconAnchor: [16, 32],
-  //   popupAnchor: [0, -32],
-  //   className: "rounded-full",
-  // });
 
   const bounds = [
     [-13.92, 90.01],

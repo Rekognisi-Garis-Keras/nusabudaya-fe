@@ -44,7 +44,6 @@ const SidebarProfile = ({ user, xp, onProfileModal }) => {
             </span>
           </div>
         </div>
-
       </div>
     </div>
   );

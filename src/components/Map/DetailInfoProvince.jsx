@@ -1,11 +1,21 @@
 import { formatDate } from "@/utils/date";
-import { ChevronLeft, X } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import React from "react";
+import DetailInfoProvinceCard from "./DetailInfoProvinceCard";
 
-const DetailInfoProvince = ({ context, detail, province, openInfo }) => {
+const DetailInfoProvince = ({ detail, province, openInfo }) => {
   const title = detail.name || detail.title;
-  const description = detail.description || detail.lyrics;
-  
+
+  const cultureSections = [
+    { label: "Tradisi", list: province.traditions }, //bikin dia jadi info
+    { label: "Rumah Tradisional", list: province.traditionalHouses },
+    { label: "Senjata Tradisional", list: province.traditionalWeapons },
+    { label: "Kuliner Khas", list: province.culinaries },
+    { label: "Destinasi Wisata", list: province.tourismSpots },
+    { label: "Alat Musik Daerah", list: province.musicalInstruments },
+    { label: "Tarian Daerah", list: province.traditionalDances }, //bikin dia jadi iframe
+  ];
+
   return (
     <>
       {/* Backdrop */}
@@ -29,7 +39,8 @@ const DetailInfoProvince = ({ context, detail, province, openInfo }) => {
               </button>
               <h2 className="text-base md:text-xl font-semibold text-white truncate">
                 {title} - {province.name}
-              </h2>;
+              </h2>
+              ;
             </div>
           </div>
 
@@ -37,9 +48,9 @@ const DetailInfoProvince = ({ context, detail, province, openInfo }) => {
           <div className="flex-1 overflow-y-auto overscroll-contain">
             <div className="p-4 md:p-6 space-y-6 md:space-y-8">
               {/* Province Title */}
-              {/* <h1 className="text-2xl md:text-3xl text-white font-bold">
+              <h1 className="text-2xl md:text-3xl text-white font-bold">
                 Provinsi {province.name}
-              </h1> */}
+              </h1>
 
               {/* Info Grid */}
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
@@ -92,36 +103,23 @@ const DetailInfoProvince = ({ context, detail, province, openInfo }) => {
               <div className="border-t border-(--color-secondary) opacity-30"></div>
 
               {/* Culture Section */}
-              <div>
-                {/* Culture Card */}
-                <div className="flex flex-col gap-6">
-                  {/* Image */}
-                  <div className="w-full sm:w-3/4 lg:w-2/3 mx-auto">
-                    <div className="aspect-video rounded-lg overflow-hidden border border-white/10">
-                      <img
-                        src="https://storage.googleapis.com/storage-ajaib-prd-platform-wp-artifact/2021/01/xxx34.jpg"
-                        className="w-full h-full object-cover"
-                        alt={province.tarianTradisional}
+              <div className="flex flex-col gap-10">
+                {cultureSections.map((section, idx) => {
+                  // Ambil data index ke-0
+                  const singleItem = section.list?.[0];
+
+                  // Kalau datanya ada, baru render Card-nya
+                  if (singleItem) {
+                    return (
+                      <DetailInfoProvinceCard
+                        key={idx}
+                        data={singleItem}
+                        label={section.label}
                       />
-                    </div>
-                  </div>
-
-                  {/* Text Content */}
-                  <div className="space-y-4">
-                    <div className="text-center">
-                      <h3 className="text-[#f2ecd5] text-3xl md:text-4xl lg:text-5xl serif mb-2">
-                        {title}
-                      </h3>
-                      <span className="uppercase text-xs md:text-sm tracking-widest text-white/70 font-semibold">
-                        {context}
-                      </span>
-                    </div>
-
-                    <p className="text-[#c7c7c7] text-sm md:text-base leading-relaxed text-justify">
-                      {description}
-                    </p>
-                  </div>
-                </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { LIST_SIDEBAR } from "@/constants/listSidebar";
 import { usePathname } from "next/navigation";
@@ -29,7 +29,8 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    if (user) { // Opsional: hanya fetch jika user sudah login
+    if (user) {
+      // Opsional: hanya fetch jika user sudah login
       fetchGameResult();
     }
   }, [user]);
@@ -61,8 +62,6 @@ const Sidebar = () => {
       >
         <button
           onClick={toggleMobileMenu}
-          /* 💡 UBAH DISINI: md:hidden jadi lg:hidden */
-          /* Biar tombol X nya tetep muncul di tablet pas menu kebuka */
           className={`lg:hidden absolute top-4 z-10001 bg-[#0D1922] border border-(--color-secondary) p-2.5 rounded-lg shadow-lg -right-15`}
           aria-label="Toggle menu"
         >
