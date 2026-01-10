@@ -7,7 +7,6 @@ import { ChevronDown, Menu, X, LogOut } from "lucide-react";
 import ProfileModal from "./Profile/ProfileModal";
 import SidebarProfile from "./SidebarProfile";
 import { useUser } from "@/context/userContext";
-import GoldEmblem from "@/app/loading/page";
 
 const Sidebar = () => {
   const pathname = usePathname();

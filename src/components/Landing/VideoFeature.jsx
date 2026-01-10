@@ -2,7 +2,11 @@ import React from "react";
 
 const VideoFeature = ({ children, title, change }) => {
   return (
-    <div className={`w-full flex ${change ? "justify-end" : "justify-start"}`}>
+    <div
+      className={`w-full flex ${
+        change ? "md:justify-end" : "md:justify-start"
+      } justify-center`}
+    >
       {/* MacOS Window Container */}
       <div className="w-[80%] rounded-lg overflow-hidden shadow-2xl bg-[#1C1C1C] border border-white/10 relative">
         {/* 1. Title Bar (Header) */}

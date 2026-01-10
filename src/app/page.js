@@ -212,7 +212,7 @@ function Page() {
         <div className="px-4">
           <FeatureHeader />
         </div>
-        <div className="w-full max-w-6xl mx-auto mt-12 md:mt-35 flex flex-col gap-20 md:gap-30">
+        <div className="w-full max-w-6xl md:px-10 mx-auto mt-12 md:mt-35 flex flex-col gap-20 md:gap-30">
           {LIST_FEATURES.map((feature, index) => (
             <div key={index} className="feature-item">
               <FeatureRow
@@ -230,7 +230,7 @@ function Page() {
 
       {/* FAQ SECTION */}
       {/* 👈 Wrapper div buat target animasi FAQ */}
-      <div className="faq-container">
+      <div className="faq-container px-5">
         <FAQSection />
       </div>
 

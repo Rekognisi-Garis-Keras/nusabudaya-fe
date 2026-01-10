@@ -5,7 +5,7 @@ import Image from "next/image";
 const FeatureRow = ({ title, description, change, count, src }) => {
   return (
     <div
-      className={`feature-${count} w-5xl flex ${
+      className={`feature-${count} max-w-5xl w-full flex ${
         change
           ? "md:flex-row flex-col-reverse"
           : "md:flex-row-reverse flex-col-reverse"
